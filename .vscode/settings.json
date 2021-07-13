@@ -1,0 +1,6 @@
+{
+	// These are now handled by Stylelint.
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": false
+}
