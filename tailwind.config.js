@@ -1,6 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
+	mode: "jit",
 	purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
 	darkMode: "class", // or 'media' or 'class'
 	theme: {
@@ -43,14 +44,6 @@ module.exports = {
 				...defaultTheme.screens,
 				"3xl": "1600px",
 			},
-		},
-	},
-	variants: {
-		extend: {
-			borderColor: ["hover"],
-			borderWidth: ["hover"],
-			padding: ["active"],
-			transitionProperty: ["hover"],
 		},
 	},
 	plugins: [],
