@@ -3,8 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { NavLink } from "../NavLink";
-import heroPic from "public/hero.jpg";
 import logo from "public/logo-sm.png";
 
 interface LayoutProps {
@@ -36,86 +34,65 @@ function Layout({
 				<meta content={keywords} name="keywords" />
 			</Head>
 
-			<header className="max-w-7xl w-full h-20 mx-auto">
-				<div className="px-6 h-full">
-					<div className="px-6 h-full flex items-center justify-between">
-						<Link href="/">
-							<a className="flex items-center">
+			<header className="w-full mx-auto">
+				<div className="pt-16 pb-14 md:py-28  h-full text-center relative">
+					<Link href="/">
+						<a>
+							<div>
 								<Image
 									src={logo}
-									height={24}
-									width={24}
+									height={60}
+									width={60}
 									alt="Venue MSCW logo"
 									priority
 								/>
-								<h1 className="ml-2 uppercase font-medium text-lg tracking-wide transform translate-y-px">
+								<h1 className="font-medium text-2xl tracking-tighter transform translate-y-px">
 									VENUE MSCW
 								</h1>
-							</a>
-						</Link>
-						<nav className="flex items-center">
-							<NavLink href="/events" className="mr-2">
-								Events
-							</NavLink>
-							<NavLink href="/about" className="mr-4">
-								About
-							</NavLink>
-							<button
-								aria-label="toggle dark mode"
-								className="w-7 h-7 px-2 bg-gray-200 dark:bg-gray-800 rounded"
-								onClick={() => setTheme(isDarkMode ? "light" : "dark")}
-							>
-								{isMounted && (
-									<svg viewBox="0 0 24 24" focusable="false" className="h-3 w-3">
-										{isDarkMode ? (
-											<g
-												strokeLinejoin="round"
-												strokeLinecap="round"
-												strokeWidth="2"
-												fill="currentColor"
-												stroke="currentColor"
-											>
-												<circle cx="12" cy="12" r="5"></circle>
-												<path d="M12 1v2"></path>
-												<path d="M12 21v2"></path>
-												<path d="M4.22 4.22l1.42 1.42"></path>
-												<path d="M18.36 18.36l1.42 1.42"></path>
-												<path d="M1 12h2"></path>
-												<path d="M21 12h2"></path>
-												<path d="M4.22 19.78l1.42-1.42"></path>
-												<path d="M18.36 5.64l1.42-1.42"></path>
-											</g>
-										) : (
-											<path
-												fill="currentColor"
-												d="M21.4,13.7C20.6,13.9,19.8,14,19,14c-5,0-9-4-9-9c0-0.8,0.1-1.6,0.3-2.4c0.1-0.3,0-0.7-0.3-1 c-0.3-0.3-0.6-0.4-1-0.3C4.3,2.7,1,7.1,1,12c0,6.1,4.9,11,11,11c4.9,0,9.3-3.3,10.6-8.1c0.1-0.3,0-0.7-0.3-1 C22.1,13.7,21.7,13.6,21.4,13.7z"
-											></path>
-										)}
-									</svg>
-								)}
-							</button>
-						</nav>
-					</div>
+							</div>
+						</a>
+					</Link>
 				</div>
 			</header>
 
-			<div className="max-w-full text-center">
-				<Image
-					src={heroPic}
-					alt="girl in a night club"
-					className="animate-flicker rounded-sm"
-					priority
-				/>
-			</div>
-			<main className="px-8 mb-28">{children}</main>
+			<main className="min-h-[calc(100vh-500px)]">{children}</main>
 
-			<footer className="text-center">
-				<p>Copyright &copy; MSCW VENUE</p>
-				<p>
-					<Link href="/about">
-						<a>About this project</a>
-					</Link>
-				</p>
+			<footer className="text-center text-xs font-light">
+				<button
+					aria-label="toggle dark mode"
+					className="mb-2 w-7 h-7 px-2 bg-gray-200 dark:bg-[#222] rounded"
+					onClick={() => setTheme(isDarkMode ? "light" : "dark")}
+				>
+					{isMounted && (
+						<svg viewBox="0 0 24 24" focusable="false" className="h-3 w-3">
+							{isDarkMode ? (
+								<g
+									strokeLinejoin="round"
+									strokeLinecap="round"
+									strokeWidth="2"
+									fill="currentColor"
+									stroke="currentColor"
+								>
+									<circle cx="12" cy="12" r="5"></circle>
+									<path d="M12 1v2"></path>
+									<path d="M12 21v2"></path>
+									<path d="M4.22 4.22l1.42 1.42"></path>
+									<path d="M18.36 18.36l1.42 1.42"></path>
+									<path d="M1 12h2"></path>
+									<path d="M21 12h2"></path>
+									<path d="M4.22 19.78l1.42-1.42"></path>
+									<path d="M18.36 5.64l1.42-1.42"></path>
+								</g>
+							) : (
+								<path
+									fill="currentColor"
+									d="M21.4,13.7C20.6,13.9,19.8,14,19,14c-5,0-9-4-9-9c0-0.8,0.1-1.6,0.3-2.4c0.1-0.3,0-0.7-0.3-1 c-0.3-0.3-0.6-0.4-1-0.3C4.3,2.7,1,7.1,1,12c0,6.1,4.9,11,11,11c4.9,0,9.3-3.3,10.6-8.1c0.1-0.3,0-0.7-0.3-1 C22.1,13.7,21.7,13.6,21.4,13.7z"
+								></path>
+							)}
+						</svg>
+					)}
+				</button>
+				<p className="mb-5">&copy; venue.moscow </p>
 			</footer>
 		</>
 	);
