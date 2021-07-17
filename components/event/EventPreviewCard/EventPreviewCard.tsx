@@ -11,7 +11,7 @@ function EventPreviewCard({ event }: EventPreviewCardProps) {
 	return (
 		<Link href={`/${event.slug}`}>
 			<a className="group">
-				<div className="px-6 relative mb-10 w-full h-72 bg-gradient-to-r from-black via-gray-600 to bg-gray-800 ">
+				<div className="px-4 sm:px-8 relative mb-10 w-full h-72 bg-gradient-to-r from-black via-gray-600 to bg-gray-800 ">
 					<Image
 						src={event.image}
 						layout="fill"
