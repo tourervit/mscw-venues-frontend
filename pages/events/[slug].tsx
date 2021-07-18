@@ -1,6 +1,49 @@
 import React from "react";
+import Image from "next/image";
 import { Layout } from "components/common/Layout";
+import { Event } from "components/event/types";
+import { API_URL } from "config";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
-export default function EventPage() {
-	return <Layout>Event Page</Layout>;
+interface EventPageProps {
+	event: Event;
+}
+
+export default function EventPage({ event }: EventPageProps) {
+	return (
+		<Layout>
+			<div className="mb-6 relative h-60 sm:h-96 w-full">
+				<Image src={event.image} layout="fill" objectFit="cover" alt={event.name} />
+			</div>
+			<div className="px-4">
+				<h1 className="text-xl mb-4">{event.name}</h1>
+				<p className="text-sm font-light leading-tight mb-4">{event.description}</p>
+				<p className="text-sm font-bold">@{event.venue}</p>
+				<p className="text-sm font-light text-blue-600">{event.address}</p>
+			</div>
+		</Layout>
+	);
+}
+
+export async function getStaticPaths() {
+	const response = await fetch(`${API_URL}/api/events`);
+	const events = await response.json();
+	const paths = events.map(event => ({ params: { slug: event.slug } }));
+	return {
+		paths,
+		fallback: true,
+	};
+}
+
+export async function getStaticProps(
+	ctx: GetStaticPropsContext,
+): Promise<GetStaticPropsResult<EventPageProps>> {
+	const response = await fetch(`${API_URL}/api/events/${ctx.params.slug}`);
+	const event = await response.json();
+
+	return {
+		props: {
+			event,
+		},
+	};
 }
