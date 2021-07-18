@@ -11,7 +11,7 @@ interface EventPreviewCardProps {
 
 function EventPreviewCard({ event, className }: EventPreviewCardProps) {
 	return (
-		<Link href={`/${event.slug}`}>
+		<Link href={`/events/${event.slug}`}>
 			<a className={cn("block relative group", className)}>
 				<Image
 					src={event.image}
