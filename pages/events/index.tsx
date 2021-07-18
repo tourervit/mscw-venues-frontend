@@ -16,7 +16,7 @@ export default function EventsPage({ events }: EventsPageProps) {
 			{events.length === 0 && <p>Sorry, no events</p>}
 			<div className="max-w-6xl mx-auto">
 				{events?.map(event => (
-					<EventPreviewCard key={event.id} event={event} />
+					<EventPreviewCard key={event.id} event={event} className="w-full h-72 mb-10" />
 				))}
 			</div>
 		</Layout>
