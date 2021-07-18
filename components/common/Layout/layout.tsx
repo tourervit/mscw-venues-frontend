@@ -55,7 +55,7 @@ function Layout({
 				</div>
 			</header>
 
-			<main className="min-h-[calc(100vh-500px)]">{children}</main>
+			<main className="min-h-[calc(100vh-500px)] mb-28">{children}</main>
 
 			<footer className="text-center text-xs font-light">
 				<button
