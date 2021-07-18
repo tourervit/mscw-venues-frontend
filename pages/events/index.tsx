@@ -27,10 +27,10 @@ export async function getStaticProps(
 	ctx: NextPageContext,
 ): Promise<GetStaticPropsResult<EventsPageProps>> {
 	const response = await fetch(`${API_URL}/api/events`);
-	const data: { events: Event[] } = await response.json();
+	const events = await response.json();
 	return {
 		props: {
-			events: data.events,
+			events,
 		},
 		revalidate: 5,
 	};
