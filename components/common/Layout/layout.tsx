@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import logo from "public/logo-sm.png";
+import { SearchBox } from "components/search/SearchBox";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -34,24 +35,23 @@ function Layout({
 				<meta content={keywords} name="keywords" />
 			</Head>
 
-			<header className="w-full mx-auto">
-				<div className="pt-16 pb-14 md:py-28  h-full text-center relative">
+			<header className="w-60 mx-auto mb-7">
+				<div className="pt-8 md:py-28 h-full text-center relative">
 					<Link href="/">
 						<a>
 							<div>
-								<Image
-									src={logo}
-									height={60}
-									width={60}
-									alt="Venue MSCW logo"
-									priority
-								/>
-								<h1 className="font-medium text-2xl tracking-tighter transform translate-y-px">
+								<div className="relative mb-1 w-10 h-10 inset-x-0 mx-auto">
+									<Image src={logo} alt="Venue MSCW logo" />
+								</div>
+								<h1 className="font-medium text-xl tracking-tighter transform translate-y-px">
 									VENUE MSCW
 								</h1>
 							</div>
 						</a>
 					</Link>
+				</div>
+				<div className="text-center mt-8">
+					<SearchBox />
 				</div>
 			</header>
 

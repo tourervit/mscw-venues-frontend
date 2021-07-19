@@ -1,5 +1,5 @@
 import React from "react";
-import { GetStaticPropsResult, NextPageContext } from "next";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { Layout } from "components/common/Layout";
 import { Event } from "components/event/event-types";
 import { API_URL } from "config";
@@ -24,7 +24,7 @@ export default function EventsPage({ events }: EventsPageProps) {
 }
 
 export async function getStaticProps(
-	ctx: NextPageContext,
+	ctx: GetStaticPropsContext,
 ): Promise<GetStaticPropsResult<EventsPageProps>> {
 	const response = await fetch(`${API_URL}/events?_sort=date:ASC`);
 	const events = await response.json();
