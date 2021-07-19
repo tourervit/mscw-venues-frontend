@@ -8,5 +8,12 @@ export interface Event {
 	date: string;
 	time: string;
 	description: string;
-	image: string;
+	image: {
+		formats: {
+			thumbnail: {
+				url;
+			};
+		};
+		url: string;
+	};
 }
