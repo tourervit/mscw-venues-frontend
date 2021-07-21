@@ -37,7 +37,7 @@ function EventForm({ onSubmit }) {
 				>
 					Event name
 				</label>
-				{errors.name && <div>{errors.name.message}</div>}
+				{errors.name && <div className="text-red-400">{errors.name.message}</div>}
 			</div>
 			<div className="relative">
 				<input
@@ -53,7 +53,7 @@ function EventForm({ onSubmit }) {
 				>
 					Venue
 				</label>
-				{errors.venue && <div>{errors.venue.message}</div>}
+				{errors.venue && <div className="text-red-400">{errors.venue.message}</div>}
 			</div>
 
 			<div className="relative">
@@ -70,7 +70,9 @@ function EventForm({ onSubmit }) {
 				>
 					Description
 				</label>
-				{errors.description && <div>{errors.description.message}</div>}
+				{errors.description && (
+					<div className="text-red-400">{errors.description.message}</div>
+				)}
 			</div>
 			<div className="relative">
 				<input
@@ -80,7 +82,7 @@ function EventForm({ onSubmit }) {
 					{...register("date", { required: "Date is required" })}
 				/>
 
-				{errors.date && <div>{errors.date.message}</div>}
+				{errors.date && <div className="text-red-400">{errors.date.message}</div>}
 			</div>
 			<button
 				type="submit"
