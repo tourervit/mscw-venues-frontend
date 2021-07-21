@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import logo from "public/logo-sm.png";
 import { SearchBox } from "components/search/SearchBox";
+import { useRouter } from "next/dist/client/router";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -19,6 +20,7 @@ function Layout({
 	description = "Find the best drink deals and happy hours in your area.",
 	keywords = "venue, art, music, theather, museum, cinema, free time",
 }: LayoutProps) {
+	const { pathname } = useRouter();
 	const [isMounted, setIsMounted] = React.useState(false);
 	const { theme, setTheme } = useTheme();
 	const isDarkMode = theme === "dark";
@@ -51,7 +53,7 @@ function Layout({
 					</Link>
 				</div>
 				<div className="text-center mt-8">
-					<SearchBox />
+					{!pathname.includes("/add") && <SearchBox />}
 				</div>
 			</header>
 

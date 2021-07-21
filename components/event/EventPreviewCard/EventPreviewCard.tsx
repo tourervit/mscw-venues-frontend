@@ -15,13 +15,13 @@ function EventPreviewCard({ event, className }: EventPreviewCardProps) {
 		<Link href={`/events/${event.slug}`}>
 			<a className={cn("block relative group", className)}>
 				<Image
-					src={event.image.url}
 					alt={event.name}
 					layout="fill"
 					objectFit="cover"
 					placeholder="blur"
 					className="lg:group-hover:scale-105 origin-top transition-all duration-300"
 					blurDataURL={event.image.formats.thumbnail.url}
+					src={event.image.url}
 				/>
 				<div className="bg-gradient-to-b from-transparent via-transparent lg:to-transparent to-black lg:bg-black/0 lg:group-hover:bg-black/40 absolute w-full h-full" />
 				<div className="absolute bottom-0 lg:top-1/2 px-4 pb-6 lg:p-8">
