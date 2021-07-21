@@ -28,7 +28,7 @@ function EventForm({ onSubmit }) {
 					id="name"
 					type="text"
 					placeholder="Media forum 2021"
-					className="peer w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
+					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
 					{...register("name", { required: "Name is required" })}
 				/>
 				<label
@@ -44,7 +44,7 @@ function EventForm({ onSubmit }) {
 					id="venue"
 					type="text"
 					placeholder="Venue"
-					className="peer w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
+					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
 					{...register("venue", { required: "Venue is required" })}
 				/>
 				<label
@@ -53,14 +53,15 @@ function EventForm({ onSubmit }) {
 				>
 					Venue
 				</label>
-				{errors.name && <div>{errors.name.message}</div>}
+				{errors.venue && <div>{errors.venue.message}</div>}
 			</div>
+
 			<div className="relative">
 				<textarea
 					id="descripton"
 					placeholder="Description"
 					rows={1}
-					className="peer w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
+					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
 					{...register("description", { required: "Description is required" })}
 				/>
 				<label
@@ -69,7 +70,17 @@ function EventForm({ onSubmit }) {
 				>
 					Description
 				</label>
-				{errors.name && <div>{errors.name.message}</div>}
+				{errors.description && <div>{errors.description.message}</div>}
+			</div>
+			<div className="relative">
+				<input
+					id="date"
+					type="date"
+					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
+					{...register("date", { required: "Date is required" })}
+				/>
+
+				{errors.date && <div>{errors.date.message}</div>}
 			</div>
 			<button
 				type="submit"
