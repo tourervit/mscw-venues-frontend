@@ -28,6 +28,5 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<EventsPageProps>> {
 	const response = await fetch(`${API_URL}/events?_sort=date:ASC`);
 	const events = await response.json();
-	console.log(events);
 	return { props: { events }, revalidate: 5 };
 }
