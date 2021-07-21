@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 	const paths = events.map(event => ({ params: { slug: event.slug } }));
 	return {
 		paths,
-		fallback: true,
+		fallback: false,
 	};
 }
 
@@ -40,7 +40,6 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<EventPageProps>> {
 	const response = await fetch(`${API_URL}/events?slug=${ctx.params.slug}`);
 	const event = await response.json();
-	console.log(event);
 	return {
 		props: {
 			event: event[0],
