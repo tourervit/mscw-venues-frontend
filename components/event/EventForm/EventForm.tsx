@@ -12,14 +12,15 @@ type Inputs = {
 
 interface EventFormProps {
 	onSubmit: SubmitHandler<Inputs>;
+	defaultValues: Inputs | {};
 }
 
-function EventForm({ onSubmit }) {
+function EventForm({ onSubmit, defaultValues }: EventFormProps) {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<Inputs>();
+	} = useForm<Inputs>({ defaultValues });
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto px-6 max-w-lg space-y-10">
