@@ -13,7 +13,15 @@ export default function EventPage({ event }: EventPageProps) {
 	return (
 		<Layout>
 			<div className="mb-6 relative h-60 sm:h-96 w-full">
-				<Image src={event.image.url} layout="fill" objectFit="cover" alt={event.name} />
+				<Image
+					src={
+						event.image?.url ??
+						"https://images.forwardcdn.com/image/1300x/center/images/cropped/pepe-1467736135-1472136530.jpg"
+					}
+					layout="fill"
+					objectFit="cover"
+					alt={event.name}
+				/>
 			</div>
 			<div className="px-4">
 				<h1 className="text-xl mb-4">{event.name}</h1>

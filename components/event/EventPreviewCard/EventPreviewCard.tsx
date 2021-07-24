@@ -4,6 +4,7 @@ import Link from "next/link";
 import cn from "classnames";
 import dateformat from "dateformat";
 import { EventData } from "../event-types";
+import eventThumbImg from "public/images/pepe_thumb.jpg";
 
 interface EventPreviewCardProps {
 	event: EventData;
@@ -20,8 +21,11 @@ function EventPreviewCard({ event, className }: EventPreviewCardProps) {
 					objectFit="cover"
 					placeholder="blur"
 					className="lg:group-hover:scale-105 origin-top transition-all duration-300"
-					blurDataURL={event.image.formats.thumbnail.url}
-					src={event.image.url}
+					blurDataURL={event.image?.formats?.thumbnail?.url ?? eventThumbImg.src}
+					src={
+						event.image?.url ??
+						"https://images.forwardcdn.com/image/1300x/center/images/cropped/pepe-1467736135-1472136530.jpg"
+					}
 				/>
 				<div className="bg-gradient-to-b from-transparent via-transparent lg:to-transparent to-black lg:bg-black/0 lg:group-hover:bg-black/40 absolute w-full h-full" />
 				<div className="absolute bottom-0 lg:top-1/2 px-4 pb-6 lg:p-8">
