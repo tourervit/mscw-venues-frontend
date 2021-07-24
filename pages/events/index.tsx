@@ -1,12 +1,12 @@
 import React from "react";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { Layout } from "components/common/Layout";
-import { Event } from "components/event/event-types";
+import { EventData } from "components/event/event-types";
 import { API_URL } from "config";
 import { EventPreviewCard } from "components/event/EventPreviewCard";
 
 interface EventsPageProps {
-	events: Event[];
+	events: EventData[];
 }
 
 export default function EventsPage({ events }: EventsPageProps) {

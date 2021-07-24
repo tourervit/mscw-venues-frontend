@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { Layout } from "components/common/Layout";
-import { Event } from "components/event/event-types";
+import { EventData } from "components/event/event-types";
 import { API_URL } from "config";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
 interface EventPageProps {
-	event: Event;
+	event: EventData;
 }
 
 export default function EventPage({ event }: EventPageProps) {

@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import cn from "classnames";
 import dateformat from "dateformat";
-import { Event } from "../event-types";
+import { EventData } from "../event-types";
 
 interface EventPreviewCardProps {
-	event: Event;
+	event: EventData;
 	className: string;
 }
 

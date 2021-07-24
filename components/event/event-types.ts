@@ -1,13 +1,16 @@
-export interface Event {
-	id: string;
+export interface EventData {
+	id: number;
 	name: string;
-	slug: string;
+	description: string;
 	venue: string;
 	address: string;
-	performers: string;
-	date: string;
-	time: string;
-	description: string;
+	slug: string;
+	date: Date;
+	time: Date;
+	user: string;
+	published_at: Date;
+	created_at: Date;
+	updated_at: Date;
 	image: {
 		formats: {
 			thumbnail: {
