@@ -1,5 +1,6 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Image from "next/image";
 
 type Inputs = {
 	name: string;
@@ -8,6 +9,7 @@ type Inputs = {
 	address: string;
 	date: Date;
 	time: string;
+	image: FileList;
 };
 
 interface EventFormProps {
@@ -20,7 +22,10 @@ function EventForm({ onSubmit, defaultValues }: EventFormProps) {
 		register,
 		handleSubmit,
 		formState: { errors },
+		clearErrors,
 	} = useForm<Inputs>({ defaultValues });
+
+	const [previewImage, setPreviewImage] = React.useState<string>("");
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto px-6 max-w-lg space-y-10">
@@ -85,6 +90,49 @@ function EventForm({ onSubmit, defaultValues }: EventFormProps) {
 
 				{errors.date && <div className="text-red-400">{errors.date.message}</div>}
 			</div>
+
+			<div className="relative">
+				<input
+					{...register("image", {
+						validate: fileList => {
+							return fileList.length === 1 ? true : "Please add an image";
+						},
+						shouldUnregister: false,
+					})}
+					id="image"
+					type="file"
+					accept="image/*"
+					onChange={(event: ChangeEvent<HTMLInputElement>) => {
+						const reader = new FileReader();
+						const file = event.target.files[0];
+						reader.readAsDataURL(file);
+						reader.onloadend = () => {
+							setPreviewImage(reader.result as string);
+						};
+						clearErrors("image");
+					}}
+					className="peer w-0 h-0 absolute focus:outline-none"
+				/>
+				<label
+					role="button"
+					htmlFor="image"
+					className="p-4 cursor-pointer block border-[2px] border-dotted peer-focus:border-solid border-gray-300 dark:border-gray-400 peer-focus:border-black dark:peer-focus:border-white"
+				>
+					Click to add image
+				</label>
+				{previewImage && (
+					<div className="relative w-full h-56">
+						<Image
+							src={previewImage}
+							layout="fill"
+							objectFit="cover"
+							alt="preview image"
+						/>
+					</div>
+				)}
+				{errors.image && <div className="text-red-400">{errors.image.message}</div>}
+			</div>
+
 			<button
 				type="submit"
 				className="w-full px-6 py-1 rounded-md bg-black text-white dark:bg-white dark:text-black"

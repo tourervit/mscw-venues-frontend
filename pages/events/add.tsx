@@ -5,21 +5,20 @@ import { API_URL } from "config";
 import toast from "react-hot-toast";
 import { useRouter } from "next/dist/client/router";
 import { EventData } from "components/event/event-types";
+import { Api } from "utils/api";
 
 export default function AddPage() {
 	const { push } = useRouter();
 
 	const handleSubmit = async data => {
-		const res = await fetch(`${API_URL}/events`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		});
+		const { image, ...rest } = data;
+		const formData = new FormData();
+		formData.append("files.image", image[0]);
+		formData.append("data", JSON.stringify(rest));
 
-		if (res.ok) {
-			const event: EventData = await res.json();
+		const response = await Api.addEvent(formData);
+		if (response.ok) {
+			const event: EventData = await response.json();
 			toast.success("Successfully created!");
 			push(`/events/${event.slug}`);
 		} else {
