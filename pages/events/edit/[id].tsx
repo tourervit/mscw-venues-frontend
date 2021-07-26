@@ -18,7 +18,6 @@ export default function EditPage({ event }: EditPageProps) {
 	const defaultValues = { ...event, date: dateformat(event.date, "yyyy-mm-dd") };
 
 	const handleSubmit = async data => {
-		console.log(data);
 		const response = await Api.editEvent(query.id, data);
 		if (response.ok) {
 			const event: EventData = await response.json();
