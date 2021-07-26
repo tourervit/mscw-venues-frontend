@@ -29,6 +29,9 @@ export class Api {
 	static getEvent(id) {
 		return _fetch(`/events/${id}`);
 	}
+	static addEvent(data) {
+		return _fetch(`/events`, { method: "POST", data });
+	}
 	static editEvent(id, data) {
 		return _fetch(`/events/${id}`, { method: "PUT", data });
 	}
