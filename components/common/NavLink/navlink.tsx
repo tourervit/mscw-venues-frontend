@@ -18,9 +18,9 @@ function NavLink({ href, className, children }: NavLinkProps) {
 			<a
 				className={cn(
 					className,
-					"border border-transparent rounded-xl px-3 py-px font-light transition-colors",
+					"border border-transparent rounded-xl py-px font-light transition-colors",
 					{ "text-gray-500 dark:text-gray-300": route !== href },
-					{ "hover:text-black dark:hover:white": true },
+					{ "hover:text-black dark:hover:text-white": true },
 					{ "text-black dark:text-white": route === href },
 				)}
 			>
