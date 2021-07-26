@@ -8,13 +8,18 @@ interface FetchConfig {
 
 const _fetch = (endpoint: string, config: FetchConfig = {}) => {
 	const { data, method = "GET", headers, ...customConfig } = config;
+	const isClient = typeof window !== "undefined";
+	const getContentType = () => {
+		return isClient && data instanceof FormData ? {} : data ? "application-json" : undefined;
+	};
+	const transformedData = isClient && data instanceof FormData ? data : JSON.stringify(data);
 
 	return fetch(`${API_URL}/${endpoint.startsWith("/") ? endpoint.slice(1) : endpoint}`, {
 		method,
-		body: data ? JSON.stringify(data) : undefined,
+		body: transformedData,
 		headers: {
 			// Authorization: `Bearer ${process.env.TOKEN}`,
-			"Content-Type": data ? "application/json" : undefined,
+			...getContentType(),
 			...headers,
 		},
 		...customConfig,
