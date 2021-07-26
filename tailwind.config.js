@@ -44,6 +44,9 @@ module.exports = {
 				...defaultTheme.screens,
 				"3xl": "1600px",
 			},
+			transitionProperty: {
+				spacing: "margin, padding",
+			},
 		},
 	},
 	plugins: [],
