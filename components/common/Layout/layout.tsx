@@ -53,7 +53,7 @@ function Layout({
 					</Link>
 				</div>
 				<div className="text-center mt-8">
-					{!pathname.includes("/add") && <SearchBox />}
+					{(pathname.includes("events") || pathname.includes("search")) && <SearchBox />}
 				</div>
 			</header>
 
