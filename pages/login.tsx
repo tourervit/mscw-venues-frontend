@@ -23,7 +23,7 @@ export default function LoginPage() {
 	};
 
 	return (
-		<Layout description="Login">
+		<Layout title="Login">
 			<div className="w-full mx-auto px-6 max-w-lg ">
 				<form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
 					<div className="relative">

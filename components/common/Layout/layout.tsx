@@ -32,7 +32,7 @@ function Layout({
 	return (
 		<>
 			<Head>
-				<title>{title ? `VENUE MSCW | ${title}` : "VENUE MSCW"}</title>
+				<title>{title ? `${title} | VENUE MSCW` : "VENUE MSCW"}</title>
 				<meta content={description} name="description" />
 				<meta content={keywords} name="keywords" />
 			</Head>
