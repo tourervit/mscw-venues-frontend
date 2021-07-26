@@ -4,6 +4,7 @@ import { Layout } from "components/common/Layout";
 import { EventData } from "components/event/event-types";
 import { API_URL } from "config";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import thumbImg from "public/logo-sm.png";
 
 interface EventPageProps {
 	event: EventData;
@@ -20,6 +21,8 @@ export default function EventPage({ event }: EventPageProps) {
 					}
 					layout="fill"
 					objectFit="cover"
+					placeholder="blur"
+					blurDataURL={event.image?.formats?.thumbnail?.url ?? thumbImg.src}
 					alt={event.name}
 				/>
 			</div>
