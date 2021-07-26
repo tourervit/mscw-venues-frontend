@@ -42,7 +42,7 @@ export async function getStaticPaths() {
 	const paths = events.map(event => ({ params: { slug: event.slug } }));
 	return {
 		paths,
-		fallback: false,
+		fallback: "blocking",
 	};
 }
 
@@ -55,5 +55,6 @@ export async function getStaticProps(
 		props: {
 			event: event[0],
 		},
+		revalidate: 5,
 	};
 }
