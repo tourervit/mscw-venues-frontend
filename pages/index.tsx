@@ -19,6 +19,13 @@ export default function HomePage() {
 					/>
 				</a>
 			</Link>
+			<div className="text-center ">
+				<Link href="/login">
+					<a className="px-8 py-1 rounded-md bg-black text-white dark:bg-white dark:text-black">
+						Login
+					</a>
+				</Link>
+			</div>
 		</Layout>
 	);
 }
