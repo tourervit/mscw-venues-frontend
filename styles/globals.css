@@ -12,6 +12,10 @@
 		-webkit-text-fill-color: black;
 	}
 
+	input::-webkit-credentials-auto-fill-button {
+		@apply dark:bg-white bg-black;
+	}
+
 	@font-face {
 		font-family: Proxima Nova;
 		font-weight: 300;
