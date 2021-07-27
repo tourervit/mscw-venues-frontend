@@ -1,3 +1,4 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "components/common/Button/Button";
 import { Input } from "components/form/Input";
@@ -5,6 +6,7 @@ import { Label } from "components/form/Label";
 import { Error } from "components/form/Error";
 import { Layout } from "components/common/Layout";
 import { NavLink } from "components/common/NavLink";
+import { useRouter } from "next/dist/client/router";
 
 type Inputs = {
 	username: string;
@@ -16,19 +18,27 @@ export default function LoginPage() {
 		register,
 		formState: { errors },
 		handleSubmit,
+		setFocus,
 	} = useForm<Inputs>();
 
+	React.useEffect(() => {
+		setFocus("username");
+	}, [setFocus]);
+
+	const { push } = useRouter();
+
 	const onSubmit = data => {
-		console.log(data);
+		push("/events");
 	};
 
 	return (
 		<Layout title="Login">
-			<div className="w-full mx-auto px-6 max-w-lg ">
+			<div className="w-full mx-auto px-6 max-w-sm">
 				<form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
 					<div className="relative">
 						<Input
-							fieldName="username"
+							autoFocus={true}
+							name="username"
 							register={register}
 							type="text"
 							validation={{ required: "Username is required" }}
@@ -38,7 +48,7 @@ export default function LoginPage() {
 					</div>
 					<div className="relative">
 						<Input
-							fieldName="password"
+							name="password"
 							register={register}
 							type="password"
 							validation={{ required: "Password is required" }}
