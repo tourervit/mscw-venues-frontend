@@ -21,9 +21,9 @@ function EventPreviewCard({ event, className }: EventPreviewCardProps) {
 					objectFit="cover"
 					placeholder="blur"
 					className="lg:group-hover:scale-105 origin-top transition-all duration-300"
-					blurDataURL={event.image?.formats?.thumbnail?.url ?? eventThumbImg.src}
+					blurDataURL={event.image?.formats?.xsmall?.url ?? eventThumbImg.src}
 					src={
-						event.image?.url ??
+						event.image?.formats?.xlarge?.url ??
 						"https://images.forwardcdn.com/image/1300x/center/images/cropped/pepe-1467736135-1472136530.jpg"
 					}
 				/>

@@ -14,9 +14,23 @@ export interface EventData {
 	image: {
 		formats: {
 			thumbnail: {
-				url;
+				url: string;
+			};
+			xlarge: {
+				url: string;
+			};
+			large: {
+				url: string;
+			};
+			medium: {
+				url: string;
+			};
+			small: {
+				url: string;
+			};
+			xsmall: {
+				url: string;
 			};
 		};
-		url: string;
 	};
 }
