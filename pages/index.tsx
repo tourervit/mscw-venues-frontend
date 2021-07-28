@@ -8,7 +8,7 @@ export default function HomePage() {
 	return (
 		<Layout>
 			<Link href="/events">
-				<a className="block relative w-full h-80 mb-36">
+				<a className="block relative w-full h-[40vh] mb-36">
 					<Image
 						src={heroPic}
 						alt="girl in a night club"
@@ -19,13 +19,6 @@ export default function HomePage() {
 					/>
 				</a>
 			</Link>
-			<div className="text-center ">
-				<Link href="/login">
-					<a className="px-8 py-1 rounded-md bg-black text-white dark:bg-white dark:text-black">
-						Login
-					</a>
-				</Link>
-			</div>
 		</Layout>
 	);
 }

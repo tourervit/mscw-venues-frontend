@@ -27,7 +27,7 @@ function SearchBox() {
 				ref={inputRef}
 				spellCheck={false}
 				placeholder="Search"
-				className="text-center font-light focus:outline-none rounded-none border-b border-transparent focus:border-b focus:border-gray-300 dark:focus:border-gray-500"
+				className="cursor-pointer text-right font-light focus:outline-none rounded-none border-b border-transparent focus:border-b focus:border-gray-300 dark:focus:border-white bg-white dark:bg-black placeholder-gray-500 dark:placeholder-gray-300 focus:text-left hover:placeholder-black dark:hover:placeholder-white"
 				value={value}
 				onChange={handleChange}
 			/>

@@ -6,6 +6,8 @@ import { useTheme } from "next-themes";
 import logo from "public/logo-sm.png";
 import { SearchBox } from "components/search/SearchBox";
 import { useRouter } from "next/dist/client/router";
+import { NavLink } from "../NavLink";
+import { useAuth } from "context/auth-context";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -29,6 +31,8 @@ function Layout({
 		setIsMounted(true);
 	}, []);
 
+	const { user } = useAuth();
+
 	return (
 		<>
 			<Head>
@@ -37,23 +41,60 @@ function Layout({
 				<meta content={keywords} name="keywords" />
 			</Head>
 
-			<header className="w-60 mx-auto mb-7">
-				<div className="pt-8 md:py-28 h-full text-center relative">
-					<Link href="/">
-						<a>
-							<div>
-								<div className="relative mb-1 w-10 h-10 inset-x-0 mx-auto">
-									<Image src={logo} alt="Venue MSCW logo" />
-								</div>
-								<h1 className="font-medium text-xl tracking-tighter transform translate-y-px">
+			<header className="max-w-7xl w-full h-20 mx-auto">
+				<div className="px-6 h-full">
+					<div className="px-6 h-full flex items-center justify-between">
+						<Link href="/">
+							<a className="flex items-center">
+								<Image
+									src={logo}
+									height={24}
+									width={24}
+									alt="Venue MSCW logo"
+									priority
+								/>
+								<h1 className="ml-2 uppercase font-medium text-lg tracking-wide transform translate-y-px">
 									VENUE MSCW
 								</h1>
-							</div>
-						</a>
-					</Link>
-				</div>
-				<div className="text-center mt-8">
-					{(pathname.includes("events") || pathname.includes("search")) && <SearchBox />}
+							</a>
+						</Link>
+						<nav className="flex items-center">
+							<SearchBox />
+							<NavLink href="/events" className="ml-4">
+								Events
+							</NavLink>
+							<NavLink href="/about" className="ml-4">
+								About
+							</NavLink>
+							{user ? (
+								<>
+									<NavLink href="/logout" className="ml-4">
+										Logout
+									</NavLink>
+								</>
+							) : (
+								<>
+									<NavLink href="/login" className="ml-4 flex items-center">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-4 w-4"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+											/>
+										</svg>
+										Login
+									</NavLink>
+								</>
+							)}
+						</nav>
+					</div>
 				</div>
 			</header>
 
