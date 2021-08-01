@@ -8,6 +8,7 @@ import { SearchBox } from "components/search/SearchBox";
 import { useRouter } from "next/dist/client/router";
 import { NavLink } from "../NavLink";
 import { useAuth } from "context/auth-context";
+import { Api } from "utils/api";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -22,7 +23,6 @@ function Layout({
 	description = "Find the best drink deals and happy hours in your area.",
 	keywords = "venue, art, music, theather, museum, cinema, free time",
 }: LayoutProps) {
-	const { pathname } = useRouter();
 	const [isMounted, setIsMounted] = React.useState(false);
 	const { theme, setTheme } = useTheme();
 	const isDarkMode = theme === "dark";
@@ -31,7 +31,13 @@ function Layout({
 		setIsMounted(true);
 	}, []);
 
-	const { user } = useAuth();
+	const { push } = useRouter();
+	const { user, logout } = useAuth();
+	const handleLogout = () => {
+		Api.logout();
+		logout();
+		push("/");
+	};
 
 	return (
 		<>
@@ -68,13 +74,33 @@ function Layout({
 							</NavLink>
 							{user ? (
 								<>
-									<NavLink href="/logout" className="ml-4">
+									<button
+										className="ml-4 flex items-center"
+										onClick={handleLogout}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-4 w-4"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+											/>
+										</svg>
 										Logout
-									</NavLink>
+									</button>
 								</>
 							) : (
 								<>
-									<NavLink href="/login" className="ml-4 flex items-center">
+									<NavLink
+										href="/login"
+										className="ml-4 flex items-center font-normal"
+									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											className="h-4 w-4"
@@ -98,7 +124,7 @@ function Layout({
 				</div>
 			</header>
 
-			<main className="min-h-[calc(100vh-500px)] mb-28">{children}</main>
+			<main className="min-h-[calc(100vh-300px)] mb-28">{children}</main>
 
 			<footer className="text-center text-xs font-light">
 				<button

@@ -16,7 +16,7 @@ export default function EventPage({ event }: EventPageProps) {
 			<div className="mb-6 relative h-60 sm:h-96 w-full">
 				<Image
 					src={
-						event.image?.url ??
+						event.image?.formats?.large.url ??
 						"https://images.forwardcdn.com/image/1300x/center/images/cropped/pepe-1467736135-1472136530.jpg"
 					}
 					layout="fill"

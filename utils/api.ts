@@ -1,4 +1,5 @@
 import { API_URL } from "config";
+import { ILoginCredentials } from "pages/api/login";
 
 interface FetchConfig {
 	data?: BodyInit;
@@ -6,15 +7,18 @@ interface FetchConfig {
 	headers?: {};
 }
 
-const _fetch = (endpoint: string, config: FetchConfig = {}) => {
+const _fetch = (url: string, config: FetchConfig = {}) => {
 	const { data, method = "GET", headers, ...customConfig } = config;
 	const isClient = typeof window !== "undefined";
 	const getContentType = () => {
-		return isClient && data instanceof FormData ? {} : data ? "application-json" : undefined;
+		return isClient && data instanceof FormData
+			? {}
+			: data
+			? { "Content-Type": "application/json" }
+			: undefined;
 	};
 	const transformedData = isClient && data instanceof FormData ? data : JSON.stringify(data);
-
-	return fetch(`${API_URL}/${endpoint.startsWith("/") ? endpoint.slice(1) : endpoint}`, {
+	return fetch(url, {
 		method,
 		body: transformedData,
 		headers: {
@@ -31,13 +35,22 @@ const _fetch = (endpoint: string, config: FetchConfig = {}) => {
  * Move another methods here
  */
 export class Api {
+	static getUserInfo() {
+		return _fetch("http://localhost:3000/api/me");
+	}
 	static getEvent(id) {
-		return _fetch(`/events/${id}`);
+		return _fetch(`http://localhost:1337/events/${id}`);
 	}
 	static addEvent(data) {
-		return _fetch(`/events`, { method: "POST", data });
+		return _fetch(`http://localhost:1337/events`, { method: "POST", data });
 	}
 	static editEvent(id, data) {
-		return _fetch(`/events/${id}`, { method: "PUT", data });
+		return _fetch(`http://localhost:1337/events/${id}`, { method: "PUT", data });
+	}
+	static login(credentials) {
+		return _fetch("http://localhost:3000/api/login", { method: "POST", data: credentials });
+	}
+	static logout() {
+		return _fetch("http://localhost:3000/api/logout", { method: "POST" });
 	}
 }

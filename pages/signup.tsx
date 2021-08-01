@@ -6,6 +6,7 @@ import { Error } from "components/form/Error";
 import { Layout } from "components/common/Layout";
 import { NavLink } from "components/common/NavLink";
 import { useRouter } from "next/dist/client/router";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 type Inputs = {
 	email: string;
@@ -91,3 +92,18 @@ export default function SignupPage() {
 		</Layout>
 	);
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+	const { req, res } = ctx;
+
+	if (req.headers.cookie) {
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
+	}
+
+	return;
+};

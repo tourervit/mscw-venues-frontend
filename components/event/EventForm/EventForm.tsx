@@ -91,7 +91,7 @@ function EventForm({ onSubmit, defaultValues }: EventFormProps) {
 				{errors.date && <div className="text-red-400">{errors.date.message}</div>}
 			</div>
 
-			<div className="relative">
+			{/* <div className="relative">
 				<input
 					{...register("image", {
 						validate: fileList => {
@@ -131,7 +131,7 @@ function EventForm({ onSubmit, defaultValues }: EventFormProps) {
 					</div>
 				)}
 				{errors.image && <div className="text-red-400">{errors.image.message}</div>}
-			</div>
+			</div> */}
 
 			<button
 				type="submit"

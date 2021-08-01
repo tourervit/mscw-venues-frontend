@@ -1,9 +1,10 @@
 import React from "react";
+import { ILoginCredentials } from "pages/api/login";
+import { Api } from "utils/api";
+import { IUserData } from "pages/api/me";
 
 type ContextType = {
-	user: {
-		name: string;
-	};
+	user: IUserData;
 	register: ({ username, email, password }) => void;
 	login: ({ username, password }) => void;
 	logout: () => void;
@@ -20,16 +21,27 @@ function AuthProvider({ children }: AuthProviderProps) {
 	const [user, setUser] = React.useState(null);
 	const [error, setError] = React.useState(null);
 
+	React.useEffect(() => {
+		getUserInfo();
+	}, []);
+
+	const getUserInfo = async () => {
+		const res = await Api.getUserInfo();
+		const data = await res.json();
+		console.log(data);
+		setUser(data.user);
+	};
+
 	const register = async ({ email, username, password }) => {
 		console.log("register");
 	};
 
-	const login = async ({ username, password }) => {
-		console.log("login");
+	const login = user => {
+		setUser(user);
 	};
 
 	const logout = async () => {
-		console.log("logout");
+		setUser(null);
 	};
 
 	const value = {
