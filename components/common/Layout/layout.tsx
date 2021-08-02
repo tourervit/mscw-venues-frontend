@@ -31,12 +31,12 @@ function Layout({
 		setIsMounted(true);
 	}, []);
 
-	const { push } = useRouter();
+	const router = useRouter();
 	const { user, logout } = useAuth();
 	const handleLogout = () => {
 		Api.logout();
 		logout();
-		push("/");
+		router.push("/");
 	};
 
 	return (
