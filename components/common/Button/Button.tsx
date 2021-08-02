@@ -4,7 +4,7 @@ import cn from "classnames";
 interface ButtonProps {
 	children: React.ReactNode;
 	type?: "button" | "submit" | "reset";
-	loading: boolean;
+	loading?: boolean;
 }
 function Button({ children, type = "button", loading = false }: ButtonProps) {
 	return (
@@ -16,7 +16,7 @@ function Button({ children, type = "button", loading = false }: ButtonProps) {
 			)}
 		>
 			{loading && (
-				<i className="inline-block -ml-4">
+				<i className="inline-block -ml-4" data-testid="button-spinner">
 					<svg
 						viewBox="0 0 1024 1024"
 						focusable="false"
