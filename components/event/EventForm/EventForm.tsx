@@ -1,97 +1,112 @@
 import React, { ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
+import { Input } from "components/form/Input";
+import { Label } from "components/form/Label";
+import { Error } from "components/form/Error";
+import { Textarea } from "components/form/Textarea";
+import { Button } from "components/common/Button";
 
 type Inputs = {
 	name: string;
-	description: string;
 	venue: string;
 	address: string;
 	date: Date;
 	time: string;
+	description: string;
 	image: FileList;
 };
 
 interface EventFormProps {
 	onSubmit: SubmitHandler<Inputs>;
 	defaultValues: Inputs | {};
+	isSubmitting: boolean;
 }
 
-function EventForm({ onSubmit, defaultValues }: EventFormProps) {
+function EventForm({ onSubmit, defaultValues, isSubmitting = false }: EventFormProps) {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		clearErrors,
+		setFocus,
 	} = useForm<Inputs>({ defaultValues });
+
+	React.useEffect(() => {
+		setFocus("name");
+	}, [setFocus]);
 
 	const [previewImage, setPreviewImage] = React.useState<string>("");
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto px-6 max-w-lg space-y-10">
 			<div className="relative">
-				<input
-					id="name"
+				<Input
+					name="name"
+					register={register}
 					type="text"
-					placeholder="Media forum 2021"
-					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
-					{...register("name", { required: "Name is required" })}
+					validation={{ required: "Name is required" }}
+					isError={!!errors.name}
 				/>
-				<label
-					className="absolute left-0 -top-5 font-light text-xs text-gray-600 dark:text-gray-300 peer-placeholder-shown:top-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-placeholder-shown:text-gray-500 transition-all"
-					htmlFor="name"
-				>
-					Event name
-				</label>
-				{errors.name && <div className="text-red-400">{errors.name.message}</div>}
+				<Label htmlFor="name">Event name</Label>
+				{errors.name && <Error>{errors.name.message}</Error>}
 			</div>
 			<div className="relative">
-				<input
-					id="venue"
+				<Input
+					name="venue"
+					register={register}
 					type="text"
-					placeholder="Venue"
-					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
-					{...register("venue", { required: "Venue is required" })}
+					validation={{ required: "Venue is required" }}
+					isError={!!errors.venue}
 				/>
-				<label
-					className="absolute left-0 -top-5 font-light text-xs text-gray-600 dark:text-gray-300 peer-placeholder-shown:top-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-placeholder-shown:text-gray-500 transition-all"
-					htmlFor="venue"
-				>
-					Venue
-				</label>
-				{errors.venue && <div className="text-red-400">{errors.venue.message}</div>}
-			</div>
-
-			<div className="relative">
-				<textarea
-					id="descripton"
-					placeholder="Description"
-					rows={1}
-					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
-					{...register("description", { required: "Description is required" })}
-				/>
-				<label
-					className="absolute left-0 -top-5 font-light text-xs text-gray-600 dark:text-gray-300 peer-placeholder-shown:top-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-placeholder-shown:text-gray-500 transition-all"
-					htmlFor="description"
-				>
-					Description
-				</label>
-				{errors.description && (
-					<div className="text-red-400">{errors.description.message}</div>
-				)}
+				<Label htmlFor="venue">Venue</Label>
+				{errors.venue && <Error>{errors.venue.message}</Error>}
 			</div>
 			<div className="relative">
-				<input
-					id="date"
+				<Input
+					name="address"
+					register={register}
+					type="text"
+					validation={{ required: "Address is required" }}
+					isError={!!errors.address}
+				/>
+				<Label htmlFor="address">Address</Label>
+				{errors.address && <Error>{errors.address.message}</Error>}
+			</div>
+			<div className="relative">
+				<Input
+					name="date"
+					register={register}
 					type="date"
-					className="peer rounded-none w-full bg-white border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:focus:border-white"
-					{...register("date", { required: "Date is required" })}
+					validation={{ required: "Date is required" }}
+					isError={!!errors.date}
 				/>
-
-				{errors.date && <div className="text-red-400">{errors.date.message}</div>}
+				{errors.date && <Error>{errors.date.message}</Error>}
 			</div>
-
-			{/* <div className="relative">
+			<div className="relative">
+				<Input
+					name="time"
+					register={register}
+					type="text"
+					validation={{ required: "Time is required" }}
+					isError={!!errors.time}
+				/>
+				<Label htmlFor="time">Time</Label>
+				{errors.time && <Error>{errors.time.message}</Error>}
+			</div>
+			<div className="relative">
+				<Textarea
+					register={register}
+					name="description"
+					rows={3}
+					validation={{ required: "Description is required" }}
+				/>
+				<Label htmlFor="description" className="peer-placeholder-shown:pl-2">
+					Description
+				</Label>
+				{errors.description && <Error>{errors.description.message}</Error>}
+			</div>
+			<div className="relative">
 				<input
 					{...register("image", {
 						validate: fileList => {
@@ -130,15 +145,12 @@ function EventForm({ onSubmit, defaultValues }: EventFormProps) {
 						/>
 					</div>
 				)}
-				{errors.image && <div className="text-red-400">{errors.image.message}</div>}
-			</div> */}
+				{errors.image && <Error>{errors.image.message}</Error>}
+			</div>
 
-			<button
-				type="submit"
-				className="w-full px-6 py-1 rounded-md bg-black text-white dark:bg-white dark:text-black"
-			>
+			<Button type="submit" loading={isSubmitting}>
 				Create
-			</button>
+			</Button>
 		</form>
 	);
 }
