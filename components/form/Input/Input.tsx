@@ -1,17 +1,24 @@
 import React from "react";
-import { UseFormRegister, RegisterOptions } from "react-hook-form";
+import { RegisterOptions } from "react-hook-form";
 import cn from "classnames";
 
 interface InputProps {
 	register: Function;
 	name: string;
-	type: "text" | "password";
+	type: "text" | "password" | "date";
 	autoFocus?: boolean;
 	validation: RegisterOptions;
 	isError?: boolean;
 }
 
-function Input({ register, name, type, autoFocus, validation, isError }: InputProps) {
+function Input({
+	register,
+	name,
+	type = "text",
+	autoFocus = false,
+	validation,
+	isError = false,
+}: InputProps) {
 	return (
 		<input
 			autoFocus={autoFocus}
