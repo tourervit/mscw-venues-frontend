@@ -5,15 +5,18 @@ interface ButtonProps {
 	children: React.ReactNode;
 	type?: "button" | "submit" | "reset";
 	loading?: boolean;
+	disabled?: boolean;
 }
-function Button({ children, type = "button", loading = false }: ButtonProps) {
+function Button({ children, type = "button", loading = false, disabled = false }: ButtonProps) {
 	return (
 		<button
 			type={type}
 			className={cn(
 				"flex items-center justify-center w-full pl-6 pr-6 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black transition-spacing duration-300",
 				{ ["pl-10"]: loading },
+				{ "bg-[#444] dark:bg-[#ccc] cursor-not-allowed": loading },
 			)}
+			disabled={loading || disabled}
 		>
 			{loading && (
 				<i className="inline-block -ml-4" data-testid="button-spinner">

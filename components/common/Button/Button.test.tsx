@@ -14,4 +14,11 @@ describe("Button", () => {
 		expect(screen.getByRole("button", { name: /click/i })).toBeInTheDocument();
 		expect(screen.getByTestId("button-spinner")).toBeInTheDocument();
 	});
+
+	test("changes color when loading", () => {
+		render(<Button loading={true}>Click</Button>);
+		const btn = screen.getByRole("button", { name: /click/i });
+		expect(btn).toBeInTheDocument();
+		expect(btn).toHaveClass("bg-[#444] dark:bg-[#ccc] cursor-not-allowed");
+	});
 });
