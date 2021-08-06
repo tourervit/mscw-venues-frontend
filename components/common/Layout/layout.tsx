@@ -32,10 +32,10 @@ function Layout({
 	}, []);
 
 	const router = useRouter();
-	const { user, logout } = useAuth();
+	const { user, setUser } = useAuth();
 	const handleLogout = () => {
 		Api.logout();
-		logout();
+		setUser(null);
 		router.push("/");
 	};
 
@@ -75,7 +75,7 @@ function Layout({
 							{user ? (
 								<>
 									<button
-										className="ml-4 flex items-center"
+										className="ml-4 flex items-center text-gray-500 dark:text-gray-300"
 										onClick={handleLogout}
 									>
 										<svg

@@ -1,13 +1,10 @@
 import React from "react";
-import { ILoginCredentials } from "pages/api/login";
 import { Api } from "utils/api";
 import { IUserData } from "pages/api/me";
 
 type ContextType = {
 	user: IUserData;
-	register: ({ username, email, password }) => void;
-	login: ({ username, password }) => void;
-	logout: () => void;
+	setUser: (data) => void;
 };
 
 interface AuthProviderProps {
@@ -19,7 +16,6 @@ AuthContext.displayName = "AuthContext";
 
 function AuthProvider({ children }: AuthProviderProps) {
 	const [user, setUser] = React.useState(null);
-	const [error, setError] = React.useState(null);
 
 	React.useEffect(() => {
 		getUserInfo();
@@ -28,27 +24,12 @@ function AuthProvider({ children }: AuthProviderProps) {
 	const getUserInfo = async () => {
 		const res = await Api.getUserInfo();
 		const data = await res.json();
-		console.log(data);
 		setUser(data.user);
-	};
-
-	const register = async ({ email, username, password }) => {
-		console.log("register");
-	};
-
-	const login = user => {
-		setUser(user);
-	};
-
-	const logout = async () => {
-		setUser(null);
 	};
 
 	const value = {
 		user,
-		register,
-		login,
-		logout,
+		setUser,
 	};
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
