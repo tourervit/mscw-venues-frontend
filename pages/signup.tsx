@@ -1,12 +1,17 @@
+import React from "react";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import Button from "components/common/Button/Button";
+import toast from "react-hot-toast";
 import { Input } from "components/form/Input";
 import { Label } from "components/form/Label";
+import { Button } from "components/common/Button";
 import { Error } from "components/form/Error";
 import { Layout } from "components/common/Layout";
 import { NavLink } from "components/common/NavLink";
-import { useRouter } from "next/dist/client/router";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { useAuth } from "context/auth-context";
+import { useAsync } from "utils/hooks";
+import { Api } from "utils/api";
 
 type Inputs = {
 	email: string;
@@ -16,21 +21,45 @@ type Inputs = {
 };
 
 export default function SignupPage() {
+	const router = useRouter();
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
 		getValues,
+		setFocus,
+		setError,
 	} = useForm<Inputs>();
-	const { push } = useRouter();
-	const onSubmit = data => {
-		console.log(data);
-		push("/events");
+
+	const { setUser } = useAuth();
+	const { data, error, isLoading, isSuccess, isError, run } = useAsync();
+
+	React.useEffect(() => {
+		setFocus("email");
+	}, [setFocus]);
+
+	const onSubmit = async data => {
+		run(Api.register(data));
 	};
+
+	React.useEffect(() => {
+		if (isSuccess) {
+			setUser(data);
+			router.replace("/dashboard");
+		}
+	}, [isSuccess, router, setUser, data]);
+
+	React.useEffect(() => {
+		if (isError) {
+			toast.error(error.message);
+			setError("email", { message: "" });
+			setError("username", { message: "" });
+		}
+	}, [isError, error, setError]);
 
 	return (
 		<Layout title="Sign Up">
-			<div className="w-full mx-auto px-6 max-w-sm">
+			<div className="w-full mx-auto pt-[16vh] px-6 max-w-sm">
 				<form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
 					<div className="relative">
 						<Input
@@ -39,6 +68,7 @@ export default function SignupPage() {
 							register={register}
 							type="text"
 							validation={{ required: "Email is required" }}
+							isError={!!errors.email}
 						/>
 						<Label htmlFor="email">Email</Label>
 						{errors.email && <Error>{errors.email.message}</Error>}
@@ -49,6 +79,7 @@ export default function SignupPage() {
 							register={register}
 							type="text"
 							validation={{ required: "Username is required" }}
+							isError={!!errors.username}
 						/>
 						<Label htmlFor="username">Username</Label>
 						{errors.username && <Error>{errors.username.message}</Error>}
@@ -80,7 +111,7 @@ export default function SignupPage() {
 						<Label htmlFor="confirmPassword">Confirm Password</Label>
 						{errors.confirmPassword && <Error>{errors.confirmPassword.message}</Error>}
 					</div>
-					<Button type="submit" loading={false}>
+					<Button type="submit" loading={isLoading}>
 						Sign Up
 					</Button>
 				</form>
@@ -105,5 +136,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 		};
 	}
 
-	return;
+	return {
+		props: {},
+	};
 };

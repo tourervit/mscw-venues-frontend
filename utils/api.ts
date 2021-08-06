@@ -50,6 +50,9 @@ export class Api {
 	static login(credentials) {
 		return _fetch("http://localhost:3000/api/login", { method: "POST", data: credentials });
 	}
+	static register(credentials) {
+		return _fetch("http://localhost:3000/api/register", { method: "POST", data: credentials });
+	}
 	static logout() {
 		return _fetch("http://localhost:3000/api/logout", { method: "POST" });
 	}
