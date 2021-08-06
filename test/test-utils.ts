@@ -1,6 +1,9 @@
 import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { renderHook } from "@testing-library/react-hooks";
 import userEvent from "@testing-library/user-event";
 import "mutationobserver-shim";
+import { IUserData } from "pages/api/me";
+import * as authHook from "context/auth-context";
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 function mockNextUseRouter(props: {
@@ -9,11 +12,23 @@ function mockNextUseRouter(props: {
 	query?: string;
 	asPath?: string;
 }) {
-	useRouter.mockImplementationOnce(() => ({
+	useRouter.mockImplementation(() => ({
 		route: props.route,
 		pathname: props.pathname,
 		query: props.query,
 		asPath: props.asPath,
+	}));
+}
+
+const useAuth = jest.spyOn(authHook, "useAuth");
+
+function mockUseAuth(props: { user?: IUserData; setUser: (data) => void }) {
+	useAuth.mockImplementation(() => ({
+		user: props.user,
+		setUser: props.setUser,
+		register: () => {},
+		login: () => {},
+		logout: () => {},
 	}));
 }
 
@@ -35,4 +50,4 @@ const waitForLoadingToFinish = () =>
 	]);
 
 export * from "@testing-library/react";
-export { userEvent, waitForLoadingToFinish, mockNextUseRouter };
+export { userEvent, waitForLoadingToFinish, mockNextUseRouter, mockUseAuth };

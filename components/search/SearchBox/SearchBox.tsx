@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useRef } from "react";
 import { useRouter } from "next/dist/client/router";
 
 function SearchBox() {
-	const { push } = useRouter();
+	const router = useRouter();
 	const inputRef = useRef(null);
 	const [value, setValue] = React.useState("");
 
@@ -11,7 +11,7 @@ function SearchBox() {
 	};
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		push({
+		router.push({
 			pathname: "/search",
 			query: {
 				q: value.trim(),
