@@ -1,17 +1,17 @@
 import React from "react";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { useRouter } from "next/dist/client/router";
 import { useForm } from "react-hook-form";
-import Button from "components/common/Button/Button";
+import toast from "react-hot-toast";
 import { Input } from "components/form/Input";
 import { Label } from "components/form/Label";
 import { Error } from "components/form/Error";
+import { Button } from "components/common/Button";
 import { Layout } from "components/common/Layout";
 import { NavLink } from "components/common/NavLink";
-import { useRouter } from "next/dist/client/router";
-import { Api } from "utils/api";
-import toast from "react-hot-toast";
-import { useAsync } from "utils/hooks";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useAuth } from "context/auth-context";
+import { Api } from "utils/api";
+import { useAsync } from "utils/hooks";
 
 type Inputs = {
 	username: string;
@@ -19,6 +19,7 @@ type Inputs = {
 };
 
 export default function LoginPage() {
+	const router = useRouter();
 	const {
 		register,
 		formState: { errors },
@@ -27,31 +28,32 @@ export default function LoginPage() {
 		setError,
 	} = useForm<Inputs>();
 
-	const { replace } = useRouter();
-	const { login } = useAuth();
-	const { data, error, status, run } = useAsync();
+	const { setUser } = useAuth();
+	const { data, error, isLoading, isSuccess, isError, run } = useAsync();
 
 	React.useEffect(() => {
 		setFocus("username");
 	}, [setFocus]);
 
+	const onSubmit = async data => {
+		run(Api.login(data));
+	};
+
 	React.useEffect(() => {
-		if (error) {
+		if (isSuccess) {
+			setUser(data);
+			router.replace("/dashboard");
+		}
+	}, [isSuccess, router, setUser, data]);
+
+	React.useEffect(() => {
+		if (isError) {
 			toast.error(error.message);
 			setError("username", { message: "" });
 			setError("password", { message: "" });
 		}
-	}, [error, setError]);
+	}, [isError, error, setError]);
 
-	const onSubmit = async data => {
-		run(Api.login(data));
-		const res = await Api.login(data);
-		if (res.ok) {
-			const user = await res.json();
-			login(user);
-			replace("/events");
-		}
-	};
 	return (
 		<Layout title="Login">
 			<div className="w-full mx-auto pt-[16vh] px-6 max-w-sm">
@@ -79,7 +81,7 @@ export default function LoginPage() {
 						<Label htmlFor="password">Password</Label>
 						{errors.password && <Error>{errors.password.message}</Error>}
 					</div>
-					<Button type="submit" loading={status === "pending"}>
+					<Button type="submit" loading={isLoading}>
 						Login
 					</Button>
 				</form>
