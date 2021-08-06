@@ -60,7 +60,7 @@ export default function LoginPage() {
 				<form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
 					<div className="relative">
 						<Input
-							autoFocus={true}
+							autoFocus
 							name="username"
 							register={register}
 							type="text"
