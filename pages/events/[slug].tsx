@@ -11,12 +11,13 @@ interface EventPageProps {
 }
 
 export default function EventPage({ event }: EventPageProps) {
+	const url = event.image?.formats?.xlarge ? event.image.formats.xlarge.url : event.image.url;
 	return (
 		<Layout>
 			<div className="mb-6 relative h-60 sm:h-96 w-full">
 				<Image
 					src={
-						event.image?.formats?.large.url ??
+						url ??
 						"https://images.forwardcdn.com/image/1300x/center/images/cropped/pepe-1467736135-1472136530.jpg"
 					}
 					layout="fill"

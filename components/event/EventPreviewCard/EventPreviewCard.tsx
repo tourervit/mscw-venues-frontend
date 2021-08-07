@@ -12,6 +12,7 @@ interface EventPreviewCardProps {
 }
 
 function EventPreviewCard({ event, className }: EventPreviewCardProps) {
+	const url = event.image?.formats?.large ? event.image.formats.large.url : event.image.url;
 	return (
 		<Link href={`/events/${event.slug}`}>
 			<a className={cn("block relative group", className)}>
@@ -23,7 +24,7 @@ function EventPreviewCard({ event, className }: EventPreviewCardProps) {
 					className="lg:group-hover:scale-105 origin-top transition-all duration-300"
 					blurDataURL={event.image?.formats?.xsmall?.url ?? eventThumbImg.src}
 					src={
-						event.image?.formats?.xlarge?.url ??
+						url ??
 						"https://images.forwardcdn.com/image/1300x/center/images/cropped/pepe-1467736135-1472136530.jpg"
 					}
 				/>

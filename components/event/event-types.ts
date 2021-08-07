@@ -12,6 +12,7 @@ export interface EventData {
 	created_at: Date;
 	updated_at: Date;
 	image: {
+		url: string;
 		formats: {
 			thumbnail: {
 				url: string;
