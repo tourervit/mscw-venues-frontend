@@ -17,8 +17,11 @@ type Inputs = {
 	username: string;
 	password: string;
 };
+interface LoginPageProps {
+	referrer: string | undefined;
+}
 
-export default function LoginPage() {
+export default function LoginPage({ referrer }: LoginPageProps) {
 	const router = useRouter();
 	const {
 		register,
@@ -42,9 +45,13 @@ export default function LoginPage() {
 	React.useEffect(() => {
 		if (isSuccess) {
 			setUser(data);
-			router.replace("/dashboard");
+			if (referrer) {
+				router.replace(referrer);
+			} else {
+				router.replace("/");
+			}
 		}
-	}, [isSuccess, router, setUser, data]);
+	}, [isSuccess, router, setUser, data, referrer]);
 
 	React.useEffect(() => {
 		if (isError) {
@@ -96,7 +103,8 @@ export default function LoginPage() {
 
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
 	const { req, res } = ctx;
-
+	const { referer } = ctx.req.headers;
+	const referrer = referer ? referer : null;
 	if (req.headers.cookie) {
 		return {
 			redirect: {
@@ -107,6 +115,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 	}
 
 	return {
-		props: {},
+		props: {
+			referrer,
+		},
 	};
 };

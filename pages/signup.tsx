@@ -20,7 +20,11 @@ type Inputs = {
 	confirmPassword: string;
 };
 
-export default function SignupPage() {
+interface SignupPageProps {
+	referrer: string | undefined;
+}
+
+export default function SignupPage({ referrer }: SignupPageProps) {
 	const router = useRouter();
 	const {
 		register,
@@ -45,9 +49,13 @@ export default function SignupPage() {
 	React.useEffect(() => {
 		if (isSuccess) {
 			setUser(data);
-			router.replace("/dashboard");
+			if (referrer) {
+				router.replace(referrer);
+			} else {
+				router.replace("/");
+			}
 		}
-	}, [isSuccess, router, setUser, data]);
+	}, [isSuccess, router, setUser, data, referrer]);
 
 	React.useEffect(() => {
 		if (isError) {
@@ -126,7 +134,8 @@ export default function SignupPage() {
 
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
 	const { req, res } = ctx;
-
+	const { referer } = ctx.req.headers;
+	const referrer = referer ? referer : null;
 	if (req.headers.cookie) {
 		return {
 			redirect: {
@@ -137,6 +146,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 	}
 
 	return {
-		props: {},
+		props: {
+			referrer,
+		},
 	};
 };
