@@ -66,6 +66,11 @@ function Layout({
 						</Link>
 						<nav className="flex items-center">
 							<SearchBox />
+							{user && (
+								<NavLink href="/dashboard" className="ml-4">
+									Dashboard
+								</NavLink>
+							)}
 							<NavLink href="/events" className="ml-4">
 								Events
 							</NavLink>
