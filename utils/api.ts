@@ -41,8 +41,8 @@ export class Api {
 	static getEvent(id) {
 		return _fetch(`http://localhost:1337/events/${id}`);
 	}
-	static addEvent(data) {
-		return _fetch(`http://localhost:1337/events`, { method: "POST", data });
+	static addEvent(data, headers = {}) {
+		return _fetch(`http://localhost:1337/events`, { method: "POST", data, headers });
 	}
 	static editEvent(id, data) {
 		return _fetch(`http://localhost:1337/events/${id}`, { method: "PUT", data });

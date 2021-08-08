@@ -1,12 +1,18 @@
 import React from "react";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import toast from "react-hot-toast";
 import { useRouter } from "next/dist/client/router";
 import { Layout } from "components/common/Layout";
 import { EventForm } from "components/event/EventForm";
 import { Api } from "utils/api";
 import { useAsync } from "utils/hooks";
+import { parseCookies } from "utils/f";
 
-export default function AddPage() {
+interface AddPageProps {
+	t: string;
+}
+
+export default function AddPage({ t }: AddPageProps) {
 	const router = useRouter();
 	const { run, data, error, isLoading, isSuccess, isError } = useAsync();
 
@@ -28,7 +34,11 @@ export default function AddPage() {
 		const formData = new FormData();
 		formData.append("files.image", image[0]);
 		formData.append("data", JSON.stringify(rest));
-		run(Api.addEvent(formData));
+		run(
+			Api.addEvent(formData, {
+				Authorization: `Bearer ${t}`,
+			}),
+		);
 	};
 
 	return (
@@ -39,3 +49,13 @@ export default function AddPage() {
 		</Layout>
 	);
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+	const { req } = ctx;
+	const t = req.headers.cookie && parseCookies(req.headers.cookie).token;
+	return {
+		props: {
+			t,
+		},
+	};
+};
