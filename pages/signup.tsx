@@ -1,17 +1,17 @@
-import React from "react";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { Input } from "components/form/Input";
-import { Label } from "components/form/Label";
-import { Button } from "components/common/Button";
-import { Error } from "components/form/Error";
-import { Layout } from "components/common/Layout";
-import { NavLink } from "components/common/NavLink";
-import { useAuth } from "context/auth-context";
-import { useAsync } from "utils/hooks";
-import { Api } from "utils/api";
+import React from 'react';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { Input } from 'components/form/Input';
+import { Label } from 'components/form/Label';
+import { Button } from 'components/common/Button';
+import { Error } from 'components/form/Error';
+import { Layout } from 'components/common/Layout';
+import { NavLink } from 'components/common/NavLink';
+import { useAuth } from 'context/auth-context';
+import { useAsync } from 'utils/hooks';
+import { Api } from 'utils/api';
 
 type Inputs = {
 	email: string;
@@ -39,7 +39,7 @@ export default function SignupPage({ referrer }: SignupPageProps) {
 	const { data, error, isLoading, isSuccess, isError, run } = useAsync();
 
 	React.useEffect(() => {
-		setFocus("email");
+		setFocus('email');
 	}, [setFocus]);
 
 	const onSubmit = async data => {
@@ -52,7 +52,7 @@ export default function SignupPage({ referrer }: SignupPageProps) {
 			if (referrer) {
 				router.replace(referrer);
 			} else {
-				router.replace("/");
+				router.replace('/');
 			}
 		}
 	}, [isSuccess, router, setUser, data, referrer]);
@@ -60,14 +60,14 @@ export default function SignupPage({ referrer }: SignupPageProps) {
 	React.useEffect(() => {
 		if (isError) {
 			toast.error(error.message);
-			setError("email", { message: "" });
-			setError("username", { message: "" });
+			setError('email', { message: '' });
+			setError('username', { message: '' });
 		}
 	}, [isError, error, setError]);
 
 	return (
 		<Layout title="Sign Up">
-			<div className="w-full mx-auto pt-[16vh] px-6 max-w-sm">
+			<div className="w-full mx-auto px-6 max-w-sm">
 				<form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
 					<div className="relative">
 						<Input
@@ -75,7 +75,7 @@ export default function SignupPage({ referrer }: SignupPageProps) {
 							name="email"
 							register={register}
 							type="text"
-							validation={{ required: "Email is required" }}
+							validation={{ required: 'Email is required' }}
 							isError={!!errors.email}
 						/>
 						<Label htmlFor="email">Email</Label>
@@ -86,7 +86,7 @@ export default function SignupPage({ referrer }: SignupPageProps) {
 							name="username"
 							register={register}
 							type="text"
-							validation={{ required: "Username is required" }}
+							validation={{ required: 'Username is required' }}
 							isError={!!errors.username}
 						/>
 						<Label htmlFor="username">Username</Label>
@@ -97,7 +97,8 @@ export default function SignupPage({ referrer }: SignupPageProps) {
 							name="password"
 							register={register}
 							type="password"
-							validation={{ required: "Password is required" }}
+							autoComplete="new-password"
+							validation={{ required: 'Password is required' }}
 						/>
 						<Label htmlFor="password">Password</Label>
 						{errors.password && <Error>{errors.password.message}</Error>}
@@ -109,8 +110,8 @@ export default function SignupPage({ referrer }: SignupPageProps) {
 							type="password"
 							validation={{
 								validate: value => {
-									const password = getValues("password");
-									if (!value) return "Confirm-password is required";
+									const password = getValues('password');
+									if (!value) return 'Confirm-password is required';
 									if (password === value) return true;
 									return "Password doesn't match";
 								},
@@ -139,7 +140,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 	if (req.headers.cookie) {
 		return {
 			redirect: {
-				destination: "/",
+				destination: '/',
 				permanent: false,
 			},
 		};

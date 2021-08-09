@@ -43,8 +43,8 @@ export default function AddPage({ t }: AddPageProps) {
 
 	return (
 		<Layout title="Add">
-			<div className="max-w-6xl mx-auto ">
-				<EventForm onSubmit={handleSubmit} defaultValues={{}} isSubmitting={isLoading} />
+			<div className="w-full mx-auto px-4 max-w-lg">
+				<EventForm onSubmit={handleSubmit} isSubmitting={isLoading} />
 			</div>
 		</Layout>
 	);

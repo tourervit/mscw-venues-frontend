@@ -7,7 +7,17 @@ export interface EventData {
 	slug: string;
 	date: Date;
 	time: Date;
-	user: string;
+	user: {
+		id: number;
+		username: string;
+		email: string;
+		provider: 'local';
+		confirmed: boolean;
+		blocked: boolean;
+		role: number;
+		created_at: Date;
+		updated_at: Date;
+	};
 	published_at: Date;
 	created_at: Date;
 	updated_at: Date;

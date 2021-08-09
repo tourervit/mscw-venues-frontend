@@ -1,14 +1,15 @@
-import React from "react";
-import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import logo from "public/logo-sm.png";
-import { SearchBox } from "components/search/SearchBox";
-import { useRouter } from "next/dist/client/router";
-import { NavLink } from "../NavLink";
-import { useAuth } from "context/auth-context";
-import { Api } from "utils/api";
+import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/dist/client/router';
+import { useTheme } from 'next-themes';
+import cn from 'classnames';
+import { NavLink } from '../NavLink';
+import { SearchBox } from 'components/search/SearchBox';
+import { useAuth } from 'context/auth-context';
+import { Api } from 'utils/api';
+import logo from 'public/logo-sm.png';
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -20,45 +21,45 @@ interface LayoutProps {
 function Layout({
 	children,
 	title,
-	description = "Find the best drink deals and happy hours in your area.",
-	keywords = "venue, art, music, theather, museum, cinema, free time",
+	description = 'Find the best drink deals and happy hours in your area.',
+	keywords = 'venue, art, music, theather, museum, cinema, free time',
 }: LayoutProps) {
 	const [isMounted, setIsMounted] = React.useState(false);
 	const { theme, setTheme } = useTheme();
-	const isDarkMode = theme === "dark";
+	const isDarkMode = theme === 'dark';
 
 	React.useEffect(() => {
 		setIsMounted(true);
 	}, []);
 
 	const router = useRouter();
+	const isHome = router.pathname === '/';
+	const isCenterFormScreen =
+		router.pathname === '/login' ||
+		router.pathname === '/signup' ||
+		router.pathname === '/events/add' ||
+		router.pathname === '/events/edit/[id]';
+
 	const { user, setUser } = useAuth();
 	const handleLogout = () => {
 		Api.logout();
 		setUser(null);
-		router.push("/");
+		router.push('/login');
 	};
-
 	return (
 		<>
 			<Head>
-				<title>{title ? `${title} | VENUE MSCW` : "VENUE MSCW"}</title>
+				<title>{title ? `${title} | VENUE MSCW` : 'VENUE MSCW'}</title>
 				<meta content={description} name="description" />
 				<meta content={keywords} name="keywords" />
 			</Head>
 
-			<header className="max-w-7xl w-full h-20 mx-auto">
+			<header className="max-w-7xl w-full h-28 mx-auto">
 				<div className="px-6 h-full">
 					<div className="px-6 h-full flex items-center justify-between">
 						<Link href="/">
 							<a className="flex items-center">
-								<Image
-									src={logo}
-									height={24}
-									width={24}
-									alt="Venue MSCW logo"
-									priority
-								/>
+								<Image src={logo} height={24} width={24} alt="Venue MSCW logo" priority />
 								<h1 className="ml-2 uppercase font-medium text-lg tracking-wide transform translate-y-px">
 									VENUE MSCW
 								</h1>
@@ -67,20 +68,17 @@ function Layout({
 						<nav className="flex items-center">
 							<SearchBox />
 							{user && (
-								<NavLink href="/dashboard" className="ml-4">
+								<NavLink href="/dashboard" className="ml-4 py-3">
 									Dashboard
 								</NavLink>
 							)}
-							<NavLink href="/events" className="ml-4">
+							<NavLink href="/events" className="ml-4 py-3">
 								Events
-							</NavLink>
-							<NavLink href="/about" className="ml-4">
-								About
 							</NavLink>
 							{user ? (
 								<>
 									<button
-										className="ml-4 flex items-center text-gray-500 dark:text-gray-300"
+										className="ml-4 py-3 flex items-center text-gray-500 dark:text-gray-300"
 										onClick={handleLogout}
 									>
 										<svg
@@ -102,10 +100,7 @@ function Layout({
 								</>
 							) : (
 								<>
-									<NavLink
-										href="/login"
-										className="ml-4 flex items-center font-normal"
-									>
+									<NavLink href="/login" className="ml-4 flex items-center font-normal py-3">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											className="h-4 w-4"
@@ -129,13 +124,20 @@ function Layout({
 				</div>
 			</header>
 
-			<main className="min-h-[calc(100vh-300px)] mb-28">{children}</main>
+			<main
+				className={cn('min-h-[calc(100vh-300px)] mb-28 pt-9', {
+					'pt-0': isHome || isCenterFormScreen,
+					'flex items-center': isCenterFormScreen,
+				})}
+			>
+				{children}
+			</main>
 
 			<footer className="text-center text-xs font-light">
 				<button
 					aria-label="toggle dark mode"
 					className="mb-2 w-7 h-7 px-2 bg-gray-200 dark:bg-[#222] rounded"
-					onClick={() => setTheme(isDarkMode ? "light" : "dark")}
+					onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
 				>
 					{isMounted && (
 						<svg viewBox="0 0 24 24" focusable="false" className="h-3 w-3">
@@ -166,7 +168,9 @@ function Layout({
 						</svg>
 					)}
 				</button>
-				<p className="mb-5">&copy; venue.moscow </p>
+				<NavLink href="/about" className="block mb-5">
+					About
+				</NavLink>
 			</footer>
 		</>
 	);

@@ -1,17 +1,17 @@
-import React from "react";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { useRouter } from "next/dist/client/router";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { Input } from "components/form/Input";
-import { Label } from "components/form/Label";
-import { Error } from "components/form/Error";
-import { Button } from "components/common/Button";
-import { Layout } from "components/common/Layout";
-import { NavLink } from "components/common/NavLink";
-import { useAuth } from "context/auth-context";
-import { Api } from "utils/api";
-import { useAsync } from "utils/hooks";
+import React from 'react';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/dist/client/router';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { Input } from 'components/form/Input';
+import { Label } from 'components/form/Label';
+import { Error } from 'components/form/Error';
+import { Button } from 'components/common/Button';
+import { Layout } from 'components/common/Layout';
+import { NavLink } from 'components/common/NavLink';
+import { useAuth } from 'context/auth-context';
+import { Api } from 'utils/api';
+import { useAsync } from 'utils/hooks';
 
 type Inputs = {
 	username: string;
@@ -35,7 +35,7 @@ export default function LoginPage({ referrer }: LoginPageProps) {
 	const { data, error, isLoading, isSuccess, isError, run } = useAsync();
 
 	React.useEffect(() => {
-		setFocus("username");
+		setFocus('username');
 	}, [setFocus]);
 
 	const onSubmit = async data => {
@@ -48,7 +48,7 @@ export default function LoginPage({ referrer }: LoginPageProps) {
 			if (referrer) {
 				router.replace(referrer);
 			} else {
-				router.replace("/");
+				router.replace('/');
 			}
 		}
 	}, [isSuccess, router, setUser, data, referrer]);
@@ -56,14 +56,14 @@ export default function LoginPage({ referrer }: LoginPageProps) {
 	React.useEffect(() => {
 		if (isError) {
 			toast.error(error.message);
-			setError("username", { message: "" });
-			setError("password", { message: "" });
+			setError('username', { message: '' });
+			setError('password', { message: '' });
 		}
 	}, [isError, error, setError]);
 
 	return (
 		<Layout title="Login">
-			<div className="w-full mx-auto pt-[16vh] px-6 max-w-sm">
+			<div className="w-full mx-auto px-6 max-w-sm">
 				<form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
 					<div className="relative">
 						<Input
@@ -71,7 +71,7 @@ export default function LoginPage({ referrer }: LoginPageProps) {
 							name="username"
 							register={register}
 							type="text"
-							validation={{ required: "Username is required" }}
+							validation={{ required: 'Username is required' }}
 							isError={!!errors.username}
 						/>
 						<Label htmlFor="username">Username or email</Label>
@@ -82,7 +82,7 @@ export default function LoginPage({ referrer }: LoginPageProps) {
 							name="password"
 							register={register}
 							type="password"
-							validation={{ required: "Password is required" }}
+							validation={{ required: 'Password is required' }}
 							isError={!!errors.password}
 						/>
 						<Label htmlFor="password">Password</Label>
@@ -108,7 +108,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 	if (req.headers.cookie) {
 		return {
 			redirect: {
-				destination: "/",
+				destination: '/',
 				permanent: false,
 			},
 		};

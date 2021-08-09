@@ -4,15 +4,12 @@ import React, { useEffect, useState } from "react";
 export default function AboutPage({ onChange }) {
 	return (
 		<Layout title="About">
-			<h1 className="text-2xl">About</h1>
-			<a href="fsdfsdfsd" className="sdf">
-				heh
-			</a>
-			{/* <ThemeSwitch /> */}
-			<p>
-				This is an app to find all kinds of cultural events in the best city of the world.
-			</p>
-			<p>Version 1.0.0</p>
+			<div className="max-w-6xl mx-auto">
+				<h1 className="mb-6 text-3xl font-light">About</h1>
+				<p>
+					Classy app to find all kinds of cultural events in the best city of the world.
+				</p>
+			</div>
 		</Layout>
 	);
 }

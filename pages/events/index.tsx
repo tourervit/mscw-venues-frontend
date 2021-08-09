@@ -12,9 +12,9 @@ interface EventsPageProps {
 export default function EventsPage({ events }: EventsPageProps) {
 	return (
 		<Layout title="Events">
-			<h1 className="mb-6 text-2xl font-light text-center">Upcoming</h1>
-			{events.length === 0 && <p>Sorry, no events</p>}
 			<div className="max-w-6xl mx-auto">
+				<h1 className="mb-6 text-3xl font-light">Upcoming</h1>
+				{events.length === 0 && <p>Sorry, no events</p>}
 				{events?.map(event => (
 					<EventPreviewCard key={event.id} event={event} className="w-full h-72 mb-10" />
 				))}
