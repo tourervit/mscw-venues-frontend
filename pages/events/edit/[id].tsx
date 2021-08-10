@@ -2,13 +2,12 @@ import React from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/dist/client/router';
 import toast from 'react-hot-toast';
-import jwtDecode from 'jwt-decode';
 import { Layout } from 'components/common/Layout';
 import { EventForm } from 'components/event/EventForm';
 import { Api } from 'utils/api';
 import { EventData } from 'components/event/event-types';
 import { useAsync } from 'utils/hooks';
-import { parseCookies } from 'utils/f';
+import { isOwner, parseCookies } from 'utils/f';
 
 interface EditPageProps {
 	event: EventData;
@@ -65,13 +64,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 	const response = await Api.getEvent(id);
 	const event: EditPageProps['event'] = await response.json();
 
-	const {
-		id: userId,
-	}: {
-		id: number;
-	} = jwtDecode(t);
-
-	if (event.user.id !== userId) {
+	if (!isOwner(t, event)) {
 		return {
 			props: {},
 			redirect: {
