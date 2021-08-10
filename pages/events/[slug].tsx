@@ -15,12 +15,12 @@ export default function EventPage({ event }: EventPageProps) {
 	const url = event.image?.formats?.xlarge ? event.image.formats.xlarge.url : event.image.url;
 	return (
 		<Layout>
-			<div className="max-w-6xl mx-auto px-4 flex">
+			<div className="max-w-6xl mx-auto px-4 flex items-center">
 				<h1 className="mb-6 text-3xl font-light">{event.name}</h1>
 				<NavLink href={`/events/edit/${event.id}`} className="mb-6 px-4 py-1">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="h-6 w-6"
+						className="h-5 w-5"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"

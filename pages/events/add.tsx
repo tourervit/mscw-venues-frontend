@@ -1,12 +1,12 @@
-import React from "react";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import toast from "react-hot-toast";
-import { useRouter } from "next/dist/client/router";
-import { Layout } from "components/common/Layout";
-import { EventForm } from "components/event/EventForm";
-import { Api } from "utils/api";
-import { useAsync } from "utils/hooks";
-import { parseCookies } from "utils/f";
+import React from 'react';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/dist/client/router';
+import { Layout } from 'components/common/Layout';
+import { EventForm } from 'components/event/EventForm';
+import { Api } from 'utils/api';
+import { useAsync } from 'utils/hooks';
+import { parseCookies } from 'utils/f';
 
 interface AddPageProps {
 	t: string;
@@ -18,7 +18,7 @@ export default function AddPage({ t }: AddPageProps) {
 
 	React.useEffect(() => {
 		if (isSuccess) {
-			toast.success("Successfully created!");
+			toast.success('Successfully created!');
 			router.push(`/events/${data.slug}`);
 		}
 	}, [data, isSuccess, router]);
@@ -32,8 +32,8 @@ export default function AddPage({ t }: AddPageProps) {
 	const handleSubmit = data => {
 		const { image, ...rest } = data;
 		const formData = new FormData();
-		formData.append("files.image", image[0]);
-		formData.append("data", JSON.stringify(rest));
+		formData.append('files.image', image[0]);
+		formData.append('data', JSON.stringify(rest));
 		run(
 			Api.addEvent(formData, {
 				Authorization: `Bearer ${t}`,

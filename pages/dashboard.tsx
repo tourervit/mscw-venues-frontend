@@ -11,11 +11,10 @@ interface DashboardPageProps {
 }
 
 export default function DashboardPage({ events }: DashboardPageProps) {
-	console.log(events);
 	return (
 		<Layout description="My Events">
 			<div className="max-w-6xl mx-auto">
-				<div className="flex items-center">
+				<div className="px-4 flex items-center">
 					<h1 className="mb-6 text-3xl font-light">My events</h1>
 					<NavLink
 						href="/events/add"
@@ -62,7 +61,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 	}
 	const { token } = parseCookies(req.headers.cookie);
 	let events = null;
-	console.log(token);
 	if (token) {
 		const res = await fetch('http://localhost:1337/events/me?_sort=created_at:DESC', {
 			headers: {
@@ -71,7 +69,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 		});
 		events = await res.json();
 	}
-	console.log(events);
 	return {
 		props: {
 			events,

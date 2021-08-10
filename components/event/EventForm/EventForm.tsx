@@ -39,7 +39,6 @@ function EventForm({ onSubmit, editable = false, event, isSubmitting = false }: 
 		clearErrors,
 		setFocus,
 	} = useForm<Inputs>({ defaultValues });
-	console.log(defaultValues);
 
 	React.useEffect(() => {
 		setFocus('name');
