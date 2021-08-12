@@ -19,7 +19,7 @@ describe('Sign Up', () => {
 			user: null,
 			setUser: expectedSetUser,
 		});
-		render(<SignupPage />);
+		render(<SignupPage referrer="/" />);
 		expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
 		expect(screen.getByLabelText('Password')).toBeInTheDocument();
