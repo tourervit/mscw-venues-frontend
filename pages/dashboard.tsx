@@ -4,7 +4,7 @@ import { Layout } from 'components/common/Layout';
 import { parseCookies } from 'utils/f';
 import { EventData } from 'components/event/event-types';
 import { EventPreviewCard } from 'components/event/EventPreviewCard';
-import { NavLink } from 'components/common/NavLink';
+import { NLink } from 'components/common/NLink';
 import { PageTitle } from 'components/common/PageTitle';
 
 interface DashboardPageProps {
@@ -17,7 +17,7 @@ export default function DashboardPage({ events }: DashboardPageProps) {
 			<div className="max-w-6xl mx-auto">
 				<div className="px-4 flex items-center">
 					<PageTitle>My events</PageTitle>
-					<NavLink
+					<NLink
 						href="/events/add"
 						className="mb-4 md:mb-10 px-3 py-1 hover:-rotate-90 transition-all duration-300"
 					>
@@ -35,11 +35,11 @@ export default function DashboardPage({ events }: DashboardPageProps) {
 								d="M12 4v16m8-8H4"
 							/>
 						</svg>
-					</NavLink>
+					</NLink>
 				</div>
 				{events.length === 0 && (
 					<p className="text-center">
-						You have no events. Do you want to <NavLink href="/events/add">create one?</NavLink>
+						You have no events. Do you want to <NLink href="/events/add">create one?</NLink>
 					</p>
 				)}
 				{events?.map(event => (

@@ -3,13 +3,13 @@ import Link from 'next/link';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 
-interface NavLinkProps {
+interface NLinkProps {
 	href: string;
 	className?: string;
 	children: React.ReactNode;
 }
 
-function NavLink({ href, className, children }: NavLinkProps) {
+function NLink({ href, className, children }: NLinkProps) {
 	const router = useRouter();
 
 	return (
@@ -28,4 +28,4 @@ function NavLink({ href, className, children }: NavLinkProps) {
 	);
 }
 
-export default NavLink;
+export default NLink;

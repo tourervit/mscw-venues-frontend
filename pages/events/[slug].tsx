@@ -3,7 +3,7 @@ import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 import { Layout } from 'components/common/Layout';
 import { EventData } from 'components/event/event-types';
-import { NavLink } from 'components/common/NavLink';
+import { NLink } from 'components/common/NLink';
 import { EventMap } from 'components/event/EventMap';
 import { PageTitle } from 'components/common/PageTitle';
 import { STRAPI_API_URL } from 'config';
@@ -19,7 +19,7 @@ export default function EventPage({ event }: EventPageProps) {
 		<Layout>
 			<div className="max-w-6xl mx-auto flex items-center">
 				<PageTitle>{event.name}</PageTitle>
-				<NavLink href={`/events/edit/${event.id}`} className="mb-4 md:mb-10 px-4 pb-1">
+				<NLink href={`/events/edit/${event.id}`} className="mb-4 md:mb-10 px-4 pb-1">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-5 w-5"
@@ -34,7 +34,7 @@ export default function EventPage({ event }: EventPageProps) {
 							d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
 						/>
 					</svg>
-				</NavLink>
+				</NLink>
 			</div>
 			<div className="mb-6 md:mb-14 relative h-60 sm:h-96 w-full">
 				<Image

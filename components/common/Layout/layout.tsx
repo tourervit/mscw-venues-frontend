@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
 import { useTheme } from 'next-themes';
 import cn from 'classnames';
-import { NavLink } from '../NavLink';
+import { NLink } from '../NLink';
 import { SearchBox } from 'components/search/SearchBox';
 import { useAuth } from 'context/auth-context';
 import { Api } from 'utils/api';
@@ -69,7 +69,7 @@ function Layout({
 						<nav className="flex items-center">
 							<SearchBox />
 							{user && (
-								<NavLink href="/dashboard" className="ml-2 xs:ml-4 py-3">
+								<NLink href="/dashboard" className="ml-2 xs:ml-4 py-3">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="h-6 w-6 sm:hidden"
@@ -85,9 +85,9 @@ function Layout({
 										/>
 									</svg>
 									<span className="hidden sm:block">Dashboard</span>
-								</NavLink>
+								</NLink>
 							)}
-							<NavLink href="/events" className="ml-2 xs:ml-4 py-3">
+							<NLink href="/events" className="ml-2 xs:ml-4 py-3">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="h-6 w-6 sm:hidden"
@@ -109,7 +109,7 @@ function Layout({
 									/>
 								</svg>
 								<span className="hidden sm:block">Events</span>
-							</NavLink>
+							</NLink>
 							{user ? (
 								<>
 									<button
@@ -135,10 +135,7 @@ function Layout({
 								</>
 							) : (
 								<>
-									<NavLink
-										href="/login"
-										className="ml-2 xs:ml-4 flex items-center font-normal py-3"
-									>
+									<NLink href="/login" className="ml-2 xs:ml-4 flex items-center font-normal py-3">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											className="h-6 w-6 sm:h-4 sm:w-4"
@@ -154,7 +151,7 @@ function Layout({
 											/>
 										</svg>
 										<span className="hidden sm:block">Login</span>
-									</NavLink>
+									</NLink>
 								</>
 							)}
 						</nav>
@@ -206,9 +203,9 @@ function Layout({
 						</svg>
 					)}
 				</button>
-				<NavLink href="/about" className="block mb-5">
+				<NLink href="/about" className="block mb-5">
 					About
-				</NavLink>
+				</NLink>
 			</footer>
 		</>
 	);

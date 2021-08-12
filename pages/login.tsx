@@ -8,7 +8,7 @@ import { Label } from 'components/form/Label';
 import { Error } from 'components/form/Error';
 import { Button } from 'components/common/Button';
 import { Layout } from 'components/common/Layout';
-import { NavLink } from 'components/common/NavLink';
+import { NLink } from 'components/common/NLink';
 import { useAuth } from 'context/auth-context';
 import { Api } from 'utils/api';
 import { useAsync } from 'utils/hooks';
@@ -94,7 +94,7 @@ export default function LoginPage({ referrer }: LoginPageProps) {
 				</form>
 				<div className="text-center mt-4 text-sm">
 					<span className="mr-1">Don't have an account?</span>
-					<NavLink href="/signup">Sign Up!</NavLink>
+					<NLink href="/signup">Sign Up!</NLink>
 				</div>
 			</div>
 		</Layout>

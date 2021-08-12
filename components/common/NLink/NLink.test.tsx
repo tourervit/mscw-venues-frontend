@@ -1,12 +1,12 @@
 import { screen, render, mockNextUseRouter } from 'test/test-utils';
-import NavLink from './NavLink';
+import NLink from './NLink';
 
-describe('NavLink', () => {
+describe('NLink', () => {
 	test('has correct href in <a> tag', () => {
 		mockNextUseRouter({
 			route: '/',
 		});
-		render(<NavLink href="/about">About</NavLink>);
+		render(<NLink href="/about">About</NLink>);
 		const lnk = screen.getByRole('link', { name: /about/i });
 		expect(lnk).toBeInTheDocument();
 		expect(lnk).toHaveAttribute('href', '/about');
@@ -16,7 +16,7 @@ describe('NavLink', () => {
 		mockNextUseRouter({
 			route: '/',
 		});
-		render(<NavLink href="/about">About</NavLink>);
+		render(<NLink href="/about">About</NLink>);
 		const lnk = screen.getByRole('link', { name: /about/i });
 		expect(lnk).toHaveClass(
 			'text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white',
@@ -27,7 +27,7 @@ describe('NavLink', () => {
 		mockNextUseRouter({
 			route: '/about',
 		});
-		render(<NavLink href="/about">About</NavLink>);
+		render(<NLink href="/about">About</NLink>);
 		const about = screen.getByRole('link', { name: /about/i });
 		expect(about).toHaveClass('text-black dark:text-white');
 	});
