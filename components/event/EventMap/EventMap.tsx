@@ -17,7 +17,7 @@ function EventMap({ address }: EventMapProps) {
 	const mapStyle =
 		theme === 'dark'
 			? 'mapbox://styles/coder4real/cko5lsm2y1oe118tes6idd8wq'
-			: 'mapbox://styles/coder4real/cks8pg0r88rxu17qwm2grycqy';
+			: 'mapbox://styles/coder4real/cks8u0bqk7hy518qquhiswd3k';
 
 	const [cords, setCords] = React.useState({ lat: 0, lng: 0 });
 
@@ -26,7 +26,7 @@ function EventMap({ address }: EventMapProps) {
 			const response = await Geocode.fromAddress(address);
 			const { lat, lng } = response.results[0].geometry.location;
 			setCords({ lat, lng });
-			setViewport({ latitude: lat, longitude: lng, zoom: 12 });
+			setViewport({ latitude: lat, longitude: lng, zoom: 16 });
 		} catch (error) {
 			setCords({ lat: 0, lng: 0 });
 		}
@@ -35,7 +35,7 @@ function EventMap({ address }: EventMapProps) {
 	const [viewport, setViewport] = React.useState({
 		latitude: 55.7558,
 		longitude: 37.6173,
-		zoom: 9,
+		zoom: 8,
 	});
 
 	React.useEffect(() => {
@@ -47,13 +47,13 @@ function EventMap({ address }: EventMapProps) {
 			{...viewport}
 			mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_KEY}
 			minZoom={8}
-			maxZoom={16}
+			maxZoom={18}
 			width="100%"
 			height={300}
 			onViewportChange={viewport => setViewport(viewport)}
 			mapStyle={mapStyle}
 		>
-			<Marker latitude={cords.lat} longitude={cords.lng}>
+			<Marker latitude={cords.lat} longitude={cords.lng} offsetLeft={-20}>
 				<Image src={MarkerImg} width={18} height={18} alt="marker" />
 			</Marker>
 		</ReactMapGL>
