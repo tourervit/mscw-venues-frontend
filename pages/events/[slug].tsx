@@ -6,6 +6,7 @@ import { API_URL } from 'config';
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import thumbImg from 'public/logo-sm.png';
 import { NavLink } from 'components/common/NavLink';
+import { EventMap } from 'components/event/EventMap';
 
 interface EventPageProps {
 	event: EventData;
@@ -52,6 +53,7 @@ export default function EventPage({ event }: EventPageProps) {
 				<p className="text-sm font-light leading-tight mb-4">{event.description}</p>
 				<p className="text-sm font-bold">@{event.venue}</p>
 				<p className="text-sm font-light text-blue-600">{event.address}</p>
+				<EventMap address={event.address} />
 			</div>
 		</Layout>
 	);
