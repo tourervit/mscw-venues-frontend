@@ -7,6 +7,7 @@ import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import thumbImg from 'public/logo-sm.png';
 import { NavLink } from 'components/common/NavLink';
 import { EventMap } from 'components/event/EventMap';
+import { PageTitle } from 'components/common/PageTitle';
 
 interface EventPageProps {
 	event: EventData;
@@ -16,9 +17,9 @@ export default function EventPage({ event }: EventPageProps) {
 	const url = event.image?.formats?.xlarge ? event.image.formats.xlarge.url : event.image.url;
 	return (
 		<Layout>
-			<div className="max-w-6xl mx-auto px-4 flex items-center">
-				<h1 className="mb-6 text-3xl font-light">{event.name}</h1>
-				<NavLink href={`/events/edit/${event.id}`} className="mb-6 px-4 py-1">
+			<div className="max-w-6xl mx-auto flex items-center">
+				<PageTitle>{event.name}</PageTitle>
+				<NavLink href={`/events/edit/${event.id}`} className="mb-4 md:mb-10 px-4 pb-1">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-5 w-5"
@@ -35,7 +36,7 @@ export default function EventPage({ event }: EventPageProps) {
 					</svg>
 				</NavLink>
 			</div>
-			<div className="mb-6 relative h-60 sm:h-96 w-full">
+			<div className="mb-6 md:mb-14 relative h-60 sm:h-96 w-full">
 				<Image
 					src={
 						url ??
@@ -48,13 +49,16 @@ export default function EventPage({ event }: EventPageProps) {
 					alt={event.name}
 				/>
 			</div>
-			<div className="max-w-6xl mx-auto px-4">
-				<h1 className="text-xl mb-4"></h1>
-				<p className="text-sm font-light leading-tight mb-4">{event.description}</p>
-				<p className="text-sm font-bold">@{event.venue}</p>
-				<p className="text-sm font-light text-blue-600">{event.address}</p>
-				<EventMap address={event.address} />
+			<div className="max-w-6xl mx-auto px-4 text-base md:text-lg font-light leading-tight">
+				<p className="mb-4 md:mb-8">
+					<span className="text-sm font-bold uppercase tracking-widest">What:</span>{' '}
+					{event.description}
+				</p>
+				<p className="mb-4 md:mb-8">
+					<span className="text-sm font-bold uppercase tracking-widest">Where:</span> @{event.venue}
+				</p>
 			</div>
+			<EventMap address={event.address} />
 		</Layout>
 	);
 }

@@ -1,8 +1,8 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Layout } from "components/common/Layout";
-import heroPic from "public/hero.jpg";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Layout } from 'components/common/Layout';
+import heroPic from 'public/hero.jpg';
 
 export default function HomePage() {
 	return (

@@ -5,6 +5,7 @@ import { parseCookies } from 'utils/f';
 import { EventData } from 'components/event/event-types';
 import { EventPreviewCard } from 'components/event/EventPreviewCard';
 import { NavLink } from 'components/common/NavLink';
+import { PageTitle } from 'components/common/PageTitle';
 
 interface DashboardPageProps {
 	events: EventData[];
@@ -15,10 +16,10 @@ export default function DashboardPage({ events }: DashboardPageProps) {
 		<Layout description="My Events">
 			<div className="max-w-6xl mx-auto">
 				<div className="px-4 flex items-center">
-					<h1 className="mb-6 text-3xl font-light">My events</h1>
+					<PageTitle>My events</PageTitle>
 					<NavLink
 						href="/events/add"
-						className="mb-6 px-3 py-1 hover:-rotate-90 transition-all duration-300"
+						className="mb-4 md:mb-10 px-3 py-1 hover:-rotate-90 transition-all duration-300"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
