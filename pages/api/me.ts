@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
+import { STRAPI_API_URL } from 'config';
 
 export interface IUserData {
 	id: number;
@@ -25,7 +26,7 @@ export default async function me(req: NextApiRequest, res: NextApiResponse) {
 			return;
 		}
 		const { token } = cookie.parse(req.headers.cookie);
-		const strapiResponse = await fetch('http://localhost:1337/users/me', {
+		const strapiResponse = await fetch(`${STRAPI_API_URL}/users/me`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},

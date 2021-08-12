@@ -6,6 +6,7 @@ import { EventData } from 'components/event/event-types';
 import { EventPreviewCard } from 'components/event/EventPreviewCard';
 import { NLink } from 'components/common/NLink';
 import { PageTitle } from 'components/common/PageTitle';
+import { STRAPI_API_URL } from 'config';
 
 interface DashboardPageProps {
 	events: EventData[];
@@ -63,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
 	const { token } = parseCookies(req.headers.cookie);
 	let events = null;
 	if (token) {
-		const res = await fetch('http://localhost:1337/events/me?_sort=created_at:DESC', {
+		const res = await fetch(`${STRAPI_API_URL}/events/me?_sort=created_at:DESC`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},

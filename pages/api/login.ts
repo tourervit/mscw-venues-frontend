@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 import { IUserData } from './me';
+import { STRAPI_API_URL } from 'config';
 
 export interface ILoginCredentials {
 	username: string;
@@ -23,7 +24,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === 'POST') {
 		const { password, username }: ILoginCredentials = req.body;
 		const body = { identifier: username, password };
-		const strapiResponse = await fetch('http://localhost:1337/auth/local', {
+		const strapiResponse = await fetch(`${STRAPI_API_URL}/auth/local`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',

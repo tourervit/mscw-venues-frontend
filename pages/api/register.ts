@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 import { IUserData } from './me';
+import { STRAPI_API_URL } from 'config';
 
 export interface IRegisterCredentials {
 	email: string;
@@ -29,7 +30,7 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
 		}
 
 		const body = { username, email, password };
-		const strapiResponse = await fetch('http://localhost:1337/auth/local/register', {
+		const strapiResponse = await fetch(`${STRAPI_API_URL}/auth/local/register`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
