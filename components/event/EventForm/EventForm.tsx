@@ -38,6 +38,7 @@ function EventForm({ onSubmit, editable = false, event, isSubmitting = false }: 
 		formState: { errors },
 		clearErrors,
 		setFocus,
+		setValue,
 	} = useForm<Inputs>({ defaultValues });
 
 	React.useEffect(() => {
@@ -113,6 +114,7 @@ function EventForm({ onSubmit, editable = false, event, isSubmitting = false }: 
 						const reader = new FileReader();
 						const file = event.target.files?.[0];
 						if (file) {
+							setValue('image', event.target.files);
 							reader.readAsDataURL(file);
 							reader.onloadend = () => {
 								setPreviewImage(reader.result as string);
