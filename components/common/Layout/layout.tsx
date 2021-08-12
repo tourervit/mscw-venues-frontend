@@ -54,36 +54,71 @@ function Layout({
 				<meta content={keywords} name="keywords" />
 			</Head>
 
-			<header className="max-w-7xl w-full h-28 mx-auto">
-				<div className="px-6 h-full">
-					<div className="px-6 h-full flex items-center justify-between">
+			<header className="max-w-6xl w-full h-20 md:h-28 mx-auto mb-0 md:mb-9">
+				<div className="px-4 xl:px-0 h-full">
+					<div className="h-full flex items-center justify-between">
 						<Link href="/">
 							<a className="flex items-center">
 								<Image src={logo} height={24} width={24} alt="Venue MSCW logo" priority />
 								<h1 className="ml-2 uppercase font-medium text-lg tracking-wide transform translate-y-px">
-									VENUE MSCW
+									<span className="hidden sm:block ">VENUE MSCW</span>
+									<span className="block sm:hidden">V M</span>
 								</h1>
 							</a>
 						</Link>
 						<nav className="flex items-center">
 							<SearchBox />
 							{user && (
-								<NavLink href="/dashboard" className="ml-4 py-3">
-									Dashboard
+								<NavLink href="/dashboard" className="ml-2 xs:ml-4 py-3">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6 sm:hidden"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+										/>
+									</svg>
+									<span className="hidden sm:block">Dashboard</span>
 								</NavLink>
 							)}
-							<NavLink href="/events" className="ml-4 py-3">
-								Events
+							<NavLink href="/events" className="ml-2 xs:ml-4 py-3">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6 sm:hidden"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+									/>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
+									/>
+								</svg>
+								<span className="hidden sm:block">Events</span>
 							</NavLink>
 							{user ? (
 								<>
 									<button
-										className="ml-4 py-3 flex items-center text-gray-500 dark:text-gray-300"
+										className="ml-2 xs:ml-4 py-3 flex items-center text-gray-500 dark:text-gray-300"
 										onClick={handleLogout}
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
-											className="h-4 w-4"
+											className="h-6 w-6 sm:h-4 sm:w-4"
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke="currentColor"
@@ -95,15 +130,18 @@ function Layout({
 												d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
 											/>
 										</svg>
-										Logout
+										<span className="hidden sm:block">Logout</span>
 									</button>
 								</>
 							) : (
 								<>
-									<NavLink href="/login" className="ml-4 flex items-center font-normal py-3">
+									<NavLink
+										href="/login"
+										className="ml-2 xs:ml-4 flex items-center font-normal py-3"
+									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
-											className="h-4 w-4"
+											className="h-6 w-6 sm:h-4 sm:w-4"
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke="currentColor"
@@ -115,7 +153,7 @@ function Layout({
 												d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
 											/>
 										</svg>
-										Login
+										<span className="hidden sm:block">Login</span>
 									</NavLink>
 								</>
 							)}
@@ -125,8 +163,8 @@ function Layout({
 			</header>
 
 			<main
-				className={cn('min-h-[calc(100vh-300px)] mb-28 pt-9', {
-					'pt-0': isHome || isCenterFormScreen,
+				className={cn('min-h-[calc(100vh-300px)] mb-28', {
+					'pt-4 sm:pt-0': isCenterFormScreen,
 					'flex items-center': isCenterFormScreen,
 				})}
 			>

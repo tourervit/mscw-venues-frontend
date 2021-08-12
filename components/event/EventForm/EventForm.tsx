@@ -47,7 +47,7 @@ function EventForm({ onSubmit, editable = false, event, isSubmitting = false }: 
 	const [previewImage, setPreviewImage] = React.useState(event?.image?.url);
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto px-6 max-w-lg space-y-10">
+		<form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto max-w-lg space-y-10">
 			<div className="relative">
 				<Input
 					name="name"
