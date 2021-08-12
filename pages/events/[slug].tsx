@@ -1,13 +1,13 @@
 import React from 'react';
+import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import Image from 'next/image';
 import { Layout } from 'components/common/Layout';
 import { EventData } from 'components/event/event-types';
-import { API_URL } from 'config';
-import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
-import thumbImg from 'public/logo-sm.png';
 import { NavLink } from 'components/common/NavLink';
 import { EventMap } from 'components/event/EventMap';
 import { PageTitle } from 'components/common/PageTitle';
+import { STRAPI_API_URL } from 'config';
+import thumbImg from 'public/logo-sm.png';
 
 interface EventPageProps {
 	event: EventData;
@@ -64,7 +64,7 @@ export default function EventPage({ event }: EventPageProps) {
 }
 
 export async function getStaticPaths() {
-	const response = await fetch(`${API_URL}/events`);
+	const response = await fetch(`${STRAPI_API_URL}/events`);
 	const events = await response.json();
 	const paths = events.map(event => ({ params: { slug: event.slug } }));
 	return {
@@ -76,7 +76,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(
 	ctx: GetStaticPropsContext,
 ): Promise<GetStaticPropsResult<EventPageProps>> {
-	const response = await fetch(`${API_URL}/events?slug=${ctx.params.slug}`);
+	const response = await fetch(`${STRAPI_API_URL}/events?slug=${ctx.params.slug}`);
 	const event = await response.json();
 	return {
 		props: {

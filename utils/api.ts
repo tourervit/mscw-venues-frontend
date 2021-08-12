@@ -1,3 +1,5 @@
+import { NEXT_API_URL, STRAPI_API_URL } from 'config';
+
 interface FetchConfig {
 	data?: BodyInit;
 	method?: 'POST' | 'PUT' | 'DELETE';
@@ -33,24 +35,24 @@ const _fetch = (url: string, config: FetchConfig = {}) => {
  */
 export class Api {
 	static getUserInfo() {
-		return _fetch('http://localhost:3000/api/me');
+		return _fetch(`${NEXT_API_URL}/api/me`);
 	}
 	static getEvent(id) {
-		return _fetch(`http://localhost:1337/events/${id}`);
+		return _fetch(`${STRAPI_API_URL}/events/${id}`);
 	}
 	static addEvent(data, headers = {}) {
-		return _fetch(`http://localhost:1337/events`, { method: 'POST', data, headers });
+		return _fetch(`${STRAPI_API_URL}/events`, { method: 'POST', data, headers });
 	}
 	static editEvent(id, data, headers = {}) {
-		return _fetch(`http://localhost:1337/events/${id}`, { method: 'PUT', data, headers });
+		return _fetch(`${STRAPI_API_URL}/events/${id}`, { method: 'PUT', data, headers });
 	}
 	static login(credentials) {
-		return _fetch('http://localhost:3000/api/login', { method: 'POST', data: credentials });
+		return _fetch(`${NEXT_API_URL}/api/login`, { method: 'POST', data: credentials });
 	}
 	static register(credentials) {
-		return _fetch('http://localhost:3000/api/register', { method: 'POST', data: credentials });
+		return _fetch(`${NEXT_API_URL}/api/register`, { method: 'POST', data: credentials });
 	}
 	static logout() {
-		return _fetch('http://localhost:3000/api/logout', { method: 'POST' });
+		return _fetch(`${NEXT_API_URL}/api/logout`, { method: 'POST' });
 	}
 }

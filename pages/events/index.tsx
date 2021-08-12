@@ -2,7 +2,7 @@ import React from 'react';
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import { Layout } from 'components/common/Layout';
 import { EventData } from 'components/event/event-types';
-import { API_URL } from 'config';
+import { STRAPI_API_URL } from 'config';
 import { EventPreviewCard } from 'components/event/EventPreviewCard';
 import { PageTitle } from 'components/common/PageTitle';
 
@@ -27,7 +27,7 @@ export default function EventsPage({ events }: EventsPageProps) {
 export async function getStaticProps(
 	ctx: GetStaticPropsContext,
 ): Promise<GetStaticPropsResult<EventsPageProps>> {
-	const response = await fetch(`${API_URL}/events?_sort=date:ASC`);
+	const response = await fetch(`${STRAPI_API_URL}/events?_sort=date:ASC`);
 	const events = await response.json();
 	return { props: { events }, revalidate: 5 };
 }

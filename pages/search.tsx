@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-	GetServerSidePropsResult,
-	GetStaticPropsResult,
-	GetStaticPropsContext,
-	GetServerSidePropsContext,
-} from 'next';
+import { GetServerSidePropsResult, GetServerSidePropsContext } from 'next';
 import qs from 'qs';
 import { useRouter } from 'next/dist/client/router';
 import { Layout } from 'components/common/Layout';
 import { EventData } from 'components/event/event-types';
-import { API_URL } from 'config';
 import { EventPreviewCard } from 'components/event/EventPreviewCard';
 import { PageTitle } from 'components/common/PageTitle';
+import { STRAPI_API_URL } from 'config';
 
 interface EventsPageProps {
 	events: EventData[];
@@ -50,7 +45,7 @@ export async function getServerSideProps(
 		},
 	});
 
-	const response = await fetch(`${API_URL}/events?_sort=date:ASC&${query}`);
+	const response = await fetch(`${STRAPI_API_URL}/events?_sort=date:ASC&${query}`);
 	const events = await response.json();
 	return {
 		props: {
