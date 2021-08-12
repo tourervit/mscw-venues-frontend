@@ -19,19 +19,19 @@
 	@font-face {
 		font-family: Proxima Nova;
 		font-weight: 300;
-		src: url(/fonts/proxima-nova/300-light.woff) format("woff");
+		src: url(/fonts/proxima-nova/300-light.woff) format('woff');
 	}
 
 	@font-face {
 		font-family: Proxima Nova;
 		font-weight: 400;
-		src: url(/fonts/proxima-nova/400-regular.woff) format("woff");
+		src: url(/fonts/proxima-nova/400-regular.woff) format('woff');
 	}
 
 	@font-face {
 		font-family: Proxima Nova;
 		font-weight: 500;
-		src: url(/fonts/proxima-nova/500-semibold.woff) format("woff");
+		src: url(/fonts/proxima-nova/500-semibold.woff) format('woff');
 	}
 }
 

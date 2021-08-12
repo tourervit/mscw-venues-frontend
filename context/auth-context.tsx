@@ -1,6 +1,6 @@
-import React from "react";
-import { Api } from "utils/api";
-import { IUserData } from "pages/api/me";
+import React from 'react';
+import { Api } from 'utils/api';
+import { IUserData } from 'pages/api/me';
 
 type ContextType = {
 	user: IUserData;
@@ -12,7 +12,7 @@ interface AuthProviderProps {
 }
 
 const AuthContext = React.createContext(null);
-AuthContext.displayName = "AuthContext";
+AuthContext.displayName = 'AuthContext';
 
 function AuthProvider({ children }: AuthProviderProps) {
 	const [user, setUser] = React.useState(null);

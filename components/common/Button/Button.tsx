@@ -1,20 +1,20 @@
-import React from "react";
-import cn from "classnames";
+import React from 'react';
+import cn from 'classnames';
 
 interface ButtonProps {
 	children: React.ReactNode;
-	type?: "button" | "submit" | "reset";
+	type?: 'button' | 'submit' | 'reset';
 	loading?: boolean;
 	disabled?: boolean;
 }
-function Button({ children, type = "button", loading = false, disabled = false }: ButtonProps) {
+function Button({ children, type = 'button', loading = false, disabled = false }: ButtonProps) {
 	return (
 		<button
 			type={type}
 			className={cn(
-				"flex items-center justify-center w-full pl-6 pr-6 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black transition-spacing duration-300",
-				{ ["pl-10"]: loading },
-				{ "bg-[#444] dark:bg-[#ccc] cursor-not-allowed": loading },
+				'flex items-center justify-center w-full pl-6 pr-6 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black transition-spacing duration-300',
+				{ ['pl-10']: loading },
+				{ 'bg-[#444] dark:bg-[#ccc] cursor-not-allowed': loading },
 			)}
 			disabled={loading || disabled}
 		>
@@ -32,7 +32,7 @@ function Button({ children, type = "button", loading = false, disabled = false }
 					</svg>
 				</i>
 			)}
-			<span className={cn("transition-spacing duration-300", { ["ml-2"]: loading })}>
+			<span className={cn('transition-spacing duration-300', { ['ml-2']: loading })}>
 				{children}
 			</span>
 		</button>

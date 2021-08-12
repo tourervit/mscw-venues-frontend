@@ -1,1 +1,1 @@
-export { default as EventPreviewCard } from "./EventPreviewCard";
+export { default as EventPreviewCard } from './EventPreviewCard';

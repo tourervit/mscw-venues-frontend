@@ -1,13 +1,13 @@
-import React from "react";
-import { RegisterOptions } from "react-hook-form";
-import cn from "classnames";
+import React from 'react';
+import { RegisterOptions } from 'react-hook-form';
+import cn from 'classnames';
 
 interface InputProps {
 	register: Function;
 	name: string;
-	type: "text" | "password" | "date";
+	type: 'text' | 'password' | 'date';
 	autoFocus?: boolean;
-	autoComplete?: "" | "new-password";
+	autoComplete?: '' | 'new-password';
 	validation: RegisterOptions;
 	isError?: boolean;
 }
@@ -15,9 +15,9 @@ interface InputProps {
 function Input({
 	register,
 	name,
-	type = "text",
+	type = 'text',
 	autoFocus = false,
-	autoComplete = "",
+	autoComplete = '',
 	validation,
 	isError = false,
 }: InputProps) {
@@ -30,9 +30,9 @@ function Input({
 			name={name}
 			autoComplete={autoComplete}
 			className={cn(
-				"peer cursor-pointer rounded-none w-full bg-white text-black border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:text-white dark:focus:border-white autofil",
+				'peer cursor-pointer rounded-none w-full bg-white text-black border-b-[1px] placeholder-transparent focus:outline-none border-gray-300 dark:border-gray-400 focus:border-black dark:bg-black dark:text-white dark:focus:border-white autofil',
 				{
-					"border-red-500 dark:border-red-500": isError,
+					'border-red-500 dark:border-red-500': isError,
 				},
 			)}
 			{...register(name, validation)}
